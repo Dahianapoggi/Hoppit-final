@@ -1,0 +1,16 @@
+# Copiar a terraform.tfvars (que git ignora) y completar cada <completar>.
+# Ningun valor de este archivo es una credencial, pero el real si identifica
+# personas y cuentas: no se versiona.
+
+region                  = "<completar: region elegida con el procedimiento de ARQ-51>"
+ips_de_administracion   = ["<completar: IP publica del equipo>/32"]
+clave_publica_ssh       = "<completar: contenido de la clave publica SSH>"
+correos_del_presupuesto = ["<completar: direccion que recibe la alerta>"]
+inicio_del_presupuesto  = "<completar: AAAA-MM-01T00:00:00Z>"
+version_imagen_ubuntu   = "<completar: version de la imagen, de az vm image list>"
+
+# Con valor por omision; cambiar solo con su criterio.
+# tamano_maquina   = "Standard_B2ats_v2"
+# tamano_swap_gib  = 2
+# presupuesto_usd  = 50
+# hora_de_apagado  = "2330"

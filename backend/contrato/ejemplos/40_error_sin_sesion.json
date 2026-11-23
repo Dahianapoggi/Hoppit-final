@@ -1,0 +1,15 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/ordenes"
+  },
+  "respuesta": {
+    "estado": 401,
+    "cuerpo": {
+      "codigo": "no_autenticado",
+      "mensaje": "Falta el token de sesion",
+      "detalle": null
+    }
+  },
+  "nota": "Sin el encabezado `Authorization`. Solo `POST /v1/sesiones`, `POST /v1/registros`, `/v1/estado` y `/estado` responden sin sesion."
+}

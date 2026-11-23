@@ -1,0 +1,22 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/incidentes",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "tipo": "inundacion",
+      "alcance": "total"
+    }
+  },
+  "respuesta": {
+    "estado": 422,
+    "cuerpo": {
+      "codigo": "tipo_de_incidente_invalido",
+      "mensaje": "Tipo de Incidente 'inundacion': no es ninguno de corte_de_calle, siniestro, desvio, cancelacion, condicion_climatica_adversa",
+      "detalle": null
+    }
+  },
+  "nota": "El tipo tiene que ser uno del catalogo `TipoDeIncidente`."
+}

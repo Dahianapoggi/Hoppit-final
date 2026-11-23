@@ -1,0 +1,30 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/planificaciones",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "ordenes": [
+        "orden-20"
+      ],
+      "vehiculos": {
+        "AE472LP": 13
+      }
+    }
+  },
+  "respuesta": {
+    "estado": 409,
+    "cuerpo": {
+      "codigo": "demanda_excede_capacidad",
+      "mensaje": "Demanda 14 bultos sobre capacidad total 12: ninguna Orden entra en los Vehiculos seleccionados. Faltan 2 bultos de capacidad.",
+      "detalle": {
+        "demanda_total": 14,
+        "capacidad_total": 12,
+        "faltante": 2
+      }
+    }
+  },
+  "nota": "CU-02 flujo 4a (RB-05), cuando no entra ninguna Orden: una sola Orden de mas bultos que la capacidad del unico Vehiculo seleccionado. `capacidad_total` es la efectiva, con el margen de la operacion (B-220, punto 2). `faltante` es la accion correctiva expresada como numero: bultos de capacidad que hay que sumar. Si entra al menos una Orden, la respuesta es un Plan parcial (ejemplo 20b)."
+}

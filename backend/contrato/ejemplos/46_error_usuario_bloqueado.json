@@ -1,0 +1,21 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/sesiones",
+    "cuerpo": {
+      "usuario": "operador-a-bloquear",
+      "contrasena": "<contrasena: omitida en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 423,
+    "cuerpo": {
+      "codigo": "usuario_bloqueado",
+      "mensaje": "Demasiados intentos fallidos seguidos. Se puede volver a intentar en 15 minutos",
+      "detalle": {
+        "segundos_restantes": 900
+      }
+    }
+  },
+  "nota": "Despues de 5 fallos seguidos, el usuario queda bloqueado 900 s, aun con la contrasena correcta, como en este pedido. El detalle y el encabezado `Retry-After` dicen cuantos segundos faltan. El estado es 423: el bloqueo es de la cuenta, no de la frecuencia de pedidos de un cliente."
+}

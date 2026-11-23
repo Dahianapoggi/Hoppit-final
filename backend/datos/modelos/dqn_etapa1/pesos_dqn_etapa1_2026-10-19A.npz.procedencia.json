@@ -1,0 +1,134 @@
+{
+  "artefacto": "pesos_dqn_etapa1",
+  "ambito": "Ciudad Autonoma de Buenos Aires",
+  "fuente": "entrenamiento en EntornoSecuencial sobre instancias sorteadas en CABA",
+  "herramienta": "tools/entrenar_dqn_etapa1.py",
+  "momento_utc": "2026-10-19T05:48:02.063204+00:00",
+  "parametros": {
+    "sha256": "c79efa9f279ec2b5c322b98c4579f652b8d7793360ae8061f0a03ef0bb82e5f8",
+    "formato": "dqn_etapa1_npz_float32_v1",
+    "codificacion": {
+      "nombre": "observacion_etapa_1",
+      "version": 1
+    },
+    "arquitectura": {
+      "dimensiones": [
+        56,
+        128,
+        128,
+        10
+      ],
+      "activacion": "ReLU",
+      "salida": "lineal",
+      "capas": [
+        "capa1.peso",
+        "capa1.sesgo",
+        "capa2.peso",
+        "capa2.sesgo",
+        "capa3.peso",
+        "capa3.sesgo"
+      ],
+      "forma_del_peso": "(salida, entrada)"
+    },
+    "N_MAX": 10,
+    "escalas": {
+      "ESCALA_DISTANCIA_M": 10000.0,
+      "ESCALA_MINUTOS": 480.0,
+      "ESCALA_DEMANDA_BULTOS": 10.0
+    },
+    "semillas": {
+      "SEMILLA_BASE_ENTRENAMIENTO_DQN": 20261022,
+      "red": 616913424,
+      "buffer": 1583070807,
+      "exploracion": 3892791364,
+      "episodios": 3580407418
+    },
+    "algoritmo": "Double DQN con mascara, implementacion propia",
+    "hiperparametros": {
+      "buffer": 100000,
+      "inicio_del_aprendizaje": 2000,
+      "copia_de_la_red_objetivo_pasos_de_gradiente": 1000,
+      "adam": 0.001,
+      "lote": 64,
+      "epsilon": [
+        1.0,
+        0.05
+      ],
+      "fraccion_de_exploracion": 0.3,
+      "perdida": "Huber",
+      "recorte_del_gradiente": 10.0,
+      "descuento": 1.0,
+      "hilos_de_torch": 1,
+      "algoritmos_deterministas": true
+    },
+    "presupuesto_de_pasos": 200000,
+    "presupuesto_original": 200000,
+    "corte_del_presupuesto": null,
+    "pasos": 200000,
+    "episodios": 20006,
+    "pasos_de_gradiente": 198001,
+    "episodios_fuera_de_la_jornada": 0,
+    "paradas_por_episodio": {
+      "9": 52,
+      "10": 19954
+    },
+    "tiempo_de_entrenamiento_s": 1752.8,
+    "tiempo_hasta_el_paso_5000_s": 12.7,
+    "segundos_por_paso_despues_del_5000": 0.003109360866666672,
+    "tiempo_rotulo": "comparable (enchufado, al menos 4 GB libres, protocolo de condiciones_de_medicion)",
+    "condiciones_al_empezar": {
+      "momento_utc": "2026-10-19T05:18:47.826837+00:00",
+      "cpu": {
+        "nombre": "13th Gen Intel(R) Core(TM) i5-1334U",
+        "nucleos_logicos": 12
+      },
+      "memoria_total_gb": 15.65,
+      "memoria_libre_gb": 6.86,
+      "sistema_operativo": "Windows-11-10.0.26200-SP0",
+      "python": "3.13.15",
+      "ortools": "9.15.6755",
+      "energia": {
+        "alimentacion": "red electrica",
+        "carga_de_la_bateria_por_ciento": 100,
+        "plan": "GUID de plan de energ├¡a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)"
+      },
+      "commit": "fcccc2f07bd9521f3277874f39f34acea4dac83b",
+      "arbol_limpio": true
+    },
+    "condiciones_al_terminar": {
+      "momento_utc": "2026-10-19T05:48:01.991496+00:00",
+      "cpu": {
+        "nombre": "13th Gen Intel(R) Core(TM) i5-1334U",
+        "nucleos_logicos": 12
+      },
+      "memoria_total_gb": 15.65,
+      "memoria_libre_gb": 7.15,
+      "sistema_operativo": "Windows-11-10.0.26200-SP0",
+      "python": "3.13.15",
+      "ortools": "9.15.6755",
+      "energia": {
+        "alimentacion": "red electrica",
+        "carga_de_la_bateria_por_ciento": 100,
+        "plan": "GUID de plan de energ├¡a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)"
+      },
+      "commit": "fcccc2f07bd9521f3277874f39f34acea4dac83b",
+      "arbol_limpio": false
+    },
+    "grafo": "grafo_ciudad_autonoma_de_buenos_aires_2026-10-14.graphml",
+    "grafo_sha256": "03c7b8ff183132324067a63a91c297b259d41be74ba5a7a6b21ffd4d5d049f79",
+    "tabla": "dispersion_relativa_de_intervalos_hangzhou_2026-10-01.csv",
+    "tabla_sha256": "70fa544f003b11fe87cb1332a0974fbd1a4219726ada6b684987940c75b7340a",
+    "deposito_nodo": 3647513546,
+    "deposito_predio": "way/1347897760",
+    "curva": "curva_dqn_etapa1_2026-10-19A.csv",
+    "curva_sha256": "2772dd11adf55e3b3294d075aa701e54fa64b647bbc756e7a7aba4f06d27f415",
+    "versiones": {
+      "torch": "2.14.1+cpu",
+      "numpy": "2.5.3",
+      "python": "3.13.15"
+    },
+    "pico_del_proceso_mb": 779.1953125,
+    "licencia_de_los_datos": "deriva de LaDe (CC BY-NC 4.0) y de Amazon 2021 (no comercial): no sirve a un piloto comercial sin reemplazo (DAT-47)",
+    "rotulo": "simulacion sobre instancias sorteadas en CABA; no es validacion contra datos reales"
+  }
+}

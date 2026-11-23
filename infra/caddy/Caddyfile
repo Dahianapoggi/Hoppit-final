@@ -1,0 +1,81 @@
+# Borde de HOPPIT (ARQ-47, seccion 1.2; 2026-10-27B, D).
+#
+# Un solo origen para la interfaz y las dos API, sin CORS:
+#   /v1/telemetria/*  -> servicio de telemetria y seguimiento
+#   /v1/* y /estado   -> nucleo
+#   /interno/*        -> 404: lo interno solo se alcanza desde la red interna
+#   /app/*            -> la version web de la aplicacion del transportista
+#   el resto          -> la interfaz estatica del operador
+#
+# El dominio llega por variable de entorno (HOPPIT_DOMINIO), sin valor en
+# este archivo. Con un nombre de dominio, Caddy obtiene el certificado y
+# sirve HTTPS solo. En el equipo, `infra/compose.local.yaml` pasa ":80": HTTP
+# sin TLS, publicado en el 8080.
+{
+	admin off
+}
+
+{$HOPPIT_DOMINIO} {
+	encode zstd gzip
+
+	header {
+		X-Content-Type-Options "nosniff"
+		# Solo el mismo origen puede enmarcar una pagina: /app/ muestra el mapa
+		# del transportista en un iframe (2026-11-03B).
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
+		# La interfaz carga todo de su propio origen, salvo las teselas del
+		# fondo de mapa (PB-21, B-247).
+		Content-Security-Policy "default-src 'self'; img-src 'self' data: https://tile.openstreetmap.org; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+		-Server
+	}
+
+	# HSTS (2026-10-28C, H5), solo en las respuestas por HTTPS: en el equipo el
+	# borde sirve HTTP y no lo emite. max-age=86400 es un dia, a proposito
+	# corto para la demostracion. Sin includeSubDomains ni preload: el dominio
+	# de DuckDNS no es propio, y preload no se puede deshacer rapido.
+	@por_https protocol https
+	header @por_https Strict-Transport-Security "max-age=86400"
+
+	# Bloques `handle` propios: un `respond` de primer nivel se ordena despues
+	# de `handle`, y el pedido llegaba al servidor de archivos de la interfaz
+	# (2026-10-27C, DK).
+	handle /interno {
+		respond 404
+	}
+
+	handle /interno/* {
+		respond 404
+	}
+
+	handle /v1/telemetria/* {
+		reverse_proxy telemetria:8001
+	}
+
+	handle /v1/* {
+		reverse_proxy nucleo:8000
+	}
+
+	handle /estado {
+		reverse_proxy nucleo:8000
+	}
+
+	# La version web de la aplicacion del transportista (2026-10-27C, W),
+	# exportada por Expo para la subruta /app. Es una sola pagina: lo que no es
+	# un archivo del paquete se responde con su index.html.
+	handle /app {
+		redir * /app/ 308
+	}
+
+	handle_path /app/* {
+		root * /srv/aplicacion
+		try_files {path} /index.html
+		file_server
+	}
+
+	handle {
+		root * /srv/interfaz
+		file_server
+	}
+}

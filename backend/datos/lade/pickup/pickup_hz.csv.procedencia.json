@@ -1,0 +1,20 @@
+{
+  "artefacto": "lade",
+  "ambito": "Hangzhou",
+  "fuente": "Hugging Face Hub -- datasets/Cainiao-AI/LaDe",
+  "herramienta": "requests 2.34.2",
+  "momento_utc": "2026-08-17T04:20:05.324643+00:00",
+  "parametros": {
+    "repositorio": "Cainiao-AI/LaDe",
+    "revision": "be2cec02775cafc8d52230303f32134382bcc50b",
+    "subconjunto": "pickup",
+    "codigo_ciudad": "hz",
+    "ruta_remota": "pickup/pickup_hz.csv",
+    "url": "https://huggingface.co/datasets/Cainiao-AI/LaDe/resolve/be2cec02775cafc8d52230303f32134382bcc50b/pickup/pickup_hz.csv",
+    "bytes": 335817674,
+    "sha256": "390b80be91d9b1ff80594c29d5206633db2759d54ccd4dff3d9f6f80513ab3e2",
+    "licencia": "CC BY-NC 4.0",
+    "fuente_de_la_licencia": "paper de LaDe (SIGKDD 2024), seccion 3.1 y datasheet C.6",
+    "licencia_discrepante_en_hugging_face": "apache-2.0"
+  }
+}

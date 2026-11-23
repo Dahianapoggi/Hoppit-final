@@ -1,0 +1,18 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/ordenes/orden-00/desasignacion",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 409,
+    "cuerpo": {
+      "codigo": "orden_no_asignada",
+      "mensaje": "La Orden orden-00 no esta asignada a ninguna Ruta: esta en estado creada",
+      "detalle": null
+    }
+  },
+  "nota": "La Orden ya fue desasignada en el ejemplo 10 y esta en Creada: no hay nada que desasignar. Se declara en vez de no hacer nada."
+}

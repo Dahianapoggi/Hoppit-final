@@ -1,0 +1,131 @@
+# Despliegue de HOPPIT en la maquina de Azure (ARQ-47 a ARQ-49; secciones 1.2
+# a 1.6 de ARQ_Pedido2; 2026-10-27B, D). Escrito y validado; no aplicado.
+#
+# Tres servicios en una red interna: `borde` (Caddy, el unico con puertos
+# publicados), `nucleo` y `telemetria`. Todo dato persistente vive en
+# HOPPIT_RAIZ_DE_DATOS (en la maquina, /srv/hoppit, el disco de datos), con
+# montajes de directorio y no volumenes con nombre (seccion 1.3). Ningun
+# archivo se monta en dos contenedores.
+#
+# Variables (en el .env de la maquina; ninguna es secreta, seccion 1.6):
+#   HOPPIT_DOMINIO        nombre del sitio para Caddy (sin valor por omision)
+#   HOPPIT_REGISTRO       prefijo de las imagenes, por ejemplo ghcr.io/<cuenta>
+#   VERSION_BORDE, VERSION_NUCLEO, VERSION_TELEMETRIA
+#                         etiqueta de cada imagen (el SHA del commit)
+#   HOPPIT_RAIZ_DE_DATOS  raiz de los datos persistentes, /srv/hoppit
+name: hoppit
+
+# Subred fija de la red interna (2026-10-28C, H1). El nucleo y telemetria
+# leen X-Forwarded-For solo de direcciones de esta subred, donde esta el
+# borde: sin eso, todo pedido llega con la direccion del contenedor de Caddy y
+# el limite de registros fallidos por origen se vuelve uno solo para todos.
+# No se superpone con la red virtual de Azure (10.20.0.0/16, terraform/main.tf).
+x-subred-interna: &subred_interna 172.28.0.0/24
+
+services:
+  borde:
+    image: ${HOPPIT_REGISTRO:-local}/hoppit-borde:${VERSION_BORDE:-local}
+    build:
+      context: ..
+      dockerfile: infra/caddy/Dockerfile
+    restart: unless-stopped
+    environment:
+      HOPPIT_DOMINIO: ${HOPPIT_DOMINIO:?Falta HOPPIT_DOMINIO, el nombre del sitio}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # Certificados y estado de Caddy en el disco de datos: perderlos obliga
+      # a pedir certificados nuevos (seccion 1.3).
+      - ${HOPPIT_RAIZ_DE_DATOS:-/srv/hoppit}/caddy/datos:/data
+      - ${HOPPIT_RAIZ_DE_DATOS:-/srv/hoppit}/caddy/config:/config
+    depends_on:
+      nucleo:
+        condition: service_healthy
+    networks:
+      - interna
+
+  nucleo:
+    image: ${HOPPIT_REGISTRO:-local}/hoppit-backend:${VERSION_NUCLEO:-local}
+    build:
+      context: ../backend
+    restart: unless-stopped
+    environment:
+      HOPPIT_GRAFO: caba
+      # Salida transaccional hacia telemetria (ARQ-59), por la red interna.
+      HOPPIT_URL_TELEMETRIA: http://telemetria:8001
+      HOPPIT_PROXIES_CONFIABLES: *subred_interna
+    # El mismo arranque que el CMD de la imagen. El despliegue conserva el
+    # bloqueo tras cinco intentos fallidos, que servir_api.py deja apagado por
+    # omision en la etapa de prueba (2026-11-03B).
+    command:
+      - python
+      - tools/servir_api.py
+      - --host
+      - 0.0.0.0
+      - --puerto
+      - "8000"
+      - --base-de-datos
+      - /var/lib/hoppit/nucleo/nucleo.sqlite3
+      - --con-bloqueo-por-intentos
+    volumes:
+      - ${HOPPIT_RAIZ_DE_DATOS:-/srv/hoppit}/datos/nucleo:/var/lib/hoppit/nucleo
+    secrets:
+      - source: firma_privada
+        target: firma_ed25519_privada.pem
+      - source: firma_publica
+        target: firma_ed25519_publica.pem
+    healthcheck:
+      # La imagen no trae curl: la verificacion usa el mismo Python.
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/estado', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      # Cargar el grafo de CABA lleva unos segundos al arrancar.
+      start_period: 60s
+    networks:
+      - interna
+
+  telemetria:
+    image: ${HOPPIT_REGISTRO:-local}/hoppit-backend:${VERSION_TELEMETRIA:-local}
+    build:
+      context: ../backend
+    restart: unless-stopped
+    environment:
+      HOPPIT_PROXIES_CONFIABLES: *subred_interna
+    command:
+      - python
+      - tools/servir_telemetria.py
+      - --host
+      - 0.0.0.0
+      - --puerto
+      - "8001"
+      - --base-de-datos
+      - /var/lib/hoppit/telemetria/telemetria.sqlite3
+    volumes:
+      - ${HOPPIT_RAIZ_DE_DATOS:-/srv/hoppit}/datos/telemetria:/var/lib/hoppit/telemetria
+    secrets:
+      # Telemetria solo verifica tokens: recibe la clave publica, nunca la
+      # privada (seccion 1.6).
+      - source: firma_publica
+        target: firma_ed25519_publica.pem
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/estado', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - interna
+
+secrets:
+  firma_privada:
+    file: ${HOPPIT_RAIZ_DE_DATOS:-/srv/hoppit}/secretos/firma_ed25519_privada.pem
+  firma_publica:
+    file: ${HOPPIT_RAIZ_DE_DATOS:-/srv/hoppit}/secretos/firma_ed25519_publica.pem
+
+networks:
+  interna:
+    ipam:
+      config:
+        - subnet: *subred_interna

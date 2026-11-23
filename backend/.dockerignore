@@ -1,0 +1,25 @@
+# Contexto de la imagen del backend: entra solo lo que el Dockerfile copia.
+# Todo lo demas queda afuera, en particular las bases, las claves, los
+# entornos virtuales y los datos sin versionar (datos/tmp, datos/lade).
+**
+!pyproject.toml
+!requirements.txt
+!src/
+!src/**
+!tools/
+!tools/**
+!datos/grafos/**
+!datos/instancia/**
+!datos/transformado/hangzhou/**
+!datos/riesgo_vial/**
+
+# Dentro de lo admitido, igual se excluye lo que nunca va en una imagen.
+**/__pycache__
+**/*.pyc
+**/*.sqlite3
+**/*.sqlite3-*
+**/*.pem
+**/.env
+**/.venv
+datos/tmp
+datos/lade

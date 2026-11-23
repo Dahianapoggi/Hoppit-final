@@ -1,0 +1,21 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/registros",
+    "cuerpo": {
+      "codigo": "<codigo de invitacion: de un solo uso, omitido en los ejemplos>",
+      "usuario": "cuenta-con-clave-corta",
+      "nombre_visible": "Cuenta registrada de ejemplo",
+      "contrasena": "<contrasena: omitida en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 422,
+    "cuerpo": {
+      "codigo": "contrasena_corta",
+      "mensaje": "La contrasena tiene que tener al menos 12 caracteres",
+      "detalle": null
+    }
+  },
+  "nota": "Menos de 12 caracteres, sin reglas de composicion (ARQ-55). La invitacion no se consume."
+}

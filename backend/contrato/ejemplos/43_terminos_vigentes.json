@@ -1,0 +1,34 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/terminos/vigentes",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "rol": "operador",
+      "documentos": [
+        {
+          "documento": "terminos_de_uso",
+          "version": 2,
+          "sha256": "32bf4487cc987cdd0c4da2a20300c2862098f5e673389fea0df5d96e180af6ad",
+          "titulo": "Términos de uso de HOPPIT",
+          "texto": "# Términos de uso de HOPPIT\n\n**Proyecto académico (UADE, 2026). Texto básico; no fue revisado jurídicamente.**\n\nVersión 2.\n\n## Uso\n\nHOPPIT es un prototipo académico de planificación y seguimiento de entregas. Se ofrece sin garantías. Los recorridos y los horarios son estimaciones y no reemplazan las normas de tránsito ni el criterio de quien conduce.\n\n## Datos\n\nSe guardan los datos de la cuenta (usuario, nombre visible, rol, contraseña cifrada de forma irreversible y datos del acceso), las aceptaciones de estos documentos y lo que se carga al operar. Se usan sólo para que el sistema funcione. Las búsquedas de direcciones se consultan al servicio Georef, y el mapa se descarga de OpenStreetMap. Sin aceptar estos términos, la cuenta no puede operar.\n\n## Responsable y contacto\n\nA quien corresponda: el responsable de los datos es quien administra la instalación de HOPPIT que estás usando. Las consultas y los pedidos de acceso, corrección o supresión de tus datos se le hacen a esa persona.\n",
+          "aceptado": false
+        },
+        {
+          "documento": "consentimiento_transferencia_internacional",
+          "version": 2,
+          "sha256": "213cace99ac5aecfa31716139eed6ca38b2cc0075e827408f166e3db0830a367",
+          "titulo": "Consentimiento para la transferencia internacional de datos",
+          "texto": "# Consentimiento para la transferencia internacional de datos\n\n**Proyecto académico (UADE, 2026). Texto básico; no fue revisado jurídicamente.**\n\nVersión 2.\n\n## Qué aceptás\n\nSi la instalación está alojada en la nube, tus datos pueden guardarse en servidores fuera de la Argentina, con la única finalidad de que HOPPIT funcione. En una instalación local, los datos quedan en ese equipo. Sin este consentimiento, la cuenta no puede operar.\n\n## Responsable y contacto\n\nA quien corresponda: el responsable de los datos es quien administra la instalación de HOPPIT que estás usando. Las consultas y los pedidos de acceso, corrección o supresión de tus datos se le hacen a esa persona.\n",
+          "aceptado": false
+        }
+      ]
+    }
+  },
+  "nota": "Los documentos del rol, cada uno con su texto, version y SHA-256, y si ya se acepto. Responde aunque falten aceptaciones. Los textos no tuvieron revision juridica: la redaccion es del equipo (ARQ-56)."
+}

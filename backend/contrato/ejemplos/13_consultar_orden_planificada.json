@@ -1,0 +1,52 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/ordenes/orden-00",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "id": "orden-00",
+      "demanda": 1,
+      "estado": "planificada",
+      "destino": {
+        "nodo": 299362038,
+        "lat": -34.4915782,
+        "lon": -58.5067678,
+        "rotulo": {
+          "texto": "Rodríguez Peña y San Lorenzo",
+          "origen": "cruce_de_calles",
+          "calles": [
+            "Rodríguez Peña",
+            "San Lorenzo"
+          ]
+        }
+      },
+      "asignacion": {
+        "ruta_id": "ruta-3382bf7b8778",
+        "secuencia_parada": 1
+      },
+      "historial": [
+        {
+          "estado_anterior": null,
+          "estado_nuevo": "creada",
+          "marca_temporal": "2026-08-24T12:00:00Z",
+          "declarante": null
+        },
+        {
+          "estado_anterior": "creada",
+          "estado_nuevo": "planificada",
+          "marca_temporal": "2026-08-24T12:00:21Z",
+          "declarante": null
+        }
+      ],
+      "prioridad": 2,
+      "plazo_comprometido": null,
+      "punto_del_alta": null
+    }
+  },
+  "nota": "CU-04 pasos 2 y 4 (RB-09). Ya planificada: informa a que Ruta y a que numero de Parada quedo asignada."
+}

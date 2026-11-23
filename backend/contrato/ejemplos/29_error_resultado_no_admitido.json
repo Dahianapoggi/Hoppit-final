@@ -1,0 +1,28 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/rutas/ruta-1d8aad4ec546/paradas/1/resultado",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "resultado": "fallida"
+    }
+  },
+  "respuesta": {
+    "estado": 409,
+    "cuerpo": {
+      "codigo": "resultado_no_admitido",
+      "mensaje": "La Parada 1 de la Ruta ruta-1d8aad4ec546 no admite el resultado fallida: sus Ordenes tienen que estar En transito. Estados: orden-00 en Completada.",
+      "detalle": {
+        "ordenes": [
+          {
+            "orden": "orden-00",
+            "estado": "completada"
+          }
+        ]
+      }
+    }
+  },
+  "nota": "La Parada ya tiene resultado: Completada es terminal, y el ciclo de vida no admite la transicion."
+}

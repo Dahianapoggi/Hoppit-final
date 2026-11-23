@@ -1,0 +1,31 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/incidentes",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "tipo": "corte_de_calle",
+      "alcance": "parcial",
+      "descripcion": "Corte de calle sobre el recorrido.",
+      "rutas_afectadas": [
+        "ruta-1d8aad4ec546"
+      ]
+    }
+  },
+  "respuesta": {
+    "estado": 201,
+    "cuerpo": {
+      "id": "incidente-de-ejemplo-01",
+      "tipo": "corte_de_calle",
+      "alcance": "parcial",
+      "descripcion": "Corte de calle sobre el recorrido.",
+      "rutas_afectadas": [
+        "ruta-1d8aad4ec546"
+      ],
+      "declarado_en": "2026-08-24T15:00:00Z"
+    }
+  },
+  "nota": "FR-18; CU-07, paso 1. Registra el Incidente y las Rutas que afecta, con el instante de la declaracion. No recalcula nada: la Ruta y sus Ordenes quedan como estaban (el recalculo, FR-05, no esta construido)."
+}

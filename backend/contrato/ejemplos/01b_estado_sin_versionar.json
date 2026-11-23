@@ -1,0 +1,22 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/estado"
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "producto": "HOPPIT",
+      "version": "1.0.0",
+      "contrato": "v1",
+      "grafo": {
+        "archivo": "grafo_san_isidro_2026-08-16.graphml",
+        "ambito": "San Isidro",
+        "sha256": "c25f952a713c",
+        "verificado": false
+      },
+      "notificaciones_pendientes": 0
+    }
+  },
+  "nota": "El mismo contenido que /v1/estado, fuera del prefijo de version. Es el unico endpoint sin versionar y es deliberado: preguntar que version de contrato corre no puede exigir conocerla de antemano. Los endpoints de dominio llevan prefijo; el de descubrimiento, no. /v1/estado se conserva y responde lo mismo."
+}

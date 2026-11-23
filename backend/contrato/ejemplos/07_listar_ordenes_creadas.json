@@ -1,0 +1,644 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/ordenes?estado=creada",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": [
+      {
+        "id": "orden-00",
+        "demanda": 1,
+        "estado": "creada",
+        "destino": {
+          "nodo": 299362038,
+          "lat": -34.4915782,
+          "lon": -58.5067678,
+          "rotulo": {
+            "texto": "Rodríguez Peña y San Lorenzo",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Rodríguez Peña",
+              "San Lorenzo"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:00Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-01",
+        "demanda": 1,
+        "estado": "creada",
+        "destino": {
+          "nodo": 661100305,
+          "lat": -34.473874,
+          "lon": -58.5536694,
+          "rotulo": {
+            "texto": "José Ingenieros y Juan Pedro Esnaola",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "José Ingenieros",
+              "Juan Pedro Esnaola"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:01Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-02",
+        "demanda": 3,
+        "estado": "creada",
+        "destino": {
+          "nodo": 299742786,
+          "lat": -34.4966738,
+          "lon": -58.5020015,
+          "rotulo": {
+            "texto": "Luis Sáenz Peña y Yapeyú",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Luis Sáenz Peña",
+              "Yapeyú"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:02Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-03",
+        "demanda": 2,
+        "estado": "creada",
+        "destino": {
+          "nodo": 299362802,
+          "lat": -34.4874089,
+          "lon": -58.5141337,
+          "rotulo": {
+            "texto": "Beruti y Entre Ríos",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Beruti",
+              "Entre Ríos"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:03Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-04",
+        "demanda": 1,
+        "estado": "creada",
+        "destino": {
+          "nodo": 3031450027,
+          "lat": -34.4703508,
+          "lon": -58.5330271,
+          "rotulo": {
+            "texto": "Intendente Tomkinson y Neuquén",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Intendente Tomkinson",
+              "Neuquén"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:04Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-05",
+        "demanda": 1,
+        "estado": "creada",
+        "destino": {
+          "nodo": 333730672,
+          "lat": -34.513182,
+          "lon": -58.5735718,
+          "rotulo": {
+            "texto": "Manuel de Sarratea y Pedro Medrano",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Manuel de Sarratea",
+              "Pedro Medrano"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:05Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-06",
+        "demanda": 1,
+        "estado": "creada",
+        "destino": {
+          "nodo": 4338770173,
+          "lat": -34.4854801,
+          "lon": -58.5027428,
+          "rotulo": {
+            "texto": "Avenida Santa Fe y Domingo S. Repetto",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Avenida Santa Fe",
+              "Domingo S. Repetto"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:06Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-07",
+        "demanda": 3,
+        "estado": "creada",
+        "destino": {
+          "nodo": 424007348,
+          "lat": -34.4766567,
+          "lon": -58.5086826,
+          "rotulo": {
+            "texto": "Hilario Ascasubi y Manzone",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Hilario Ascasubi",
+              "Manzone"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:07Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-08",
+        "demanda": 1,
+        "estado": "creada",
+        "destino": {
+          "nodo": 338407656,
+          "lat": -34.503619,
+          "lon": -58.5265341,
+          "rotulo": {
+            "texto": "México y Santiago del Estero",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "México",
+              "Santiago del Estero"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:08Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-09",
+        "demanda": 1,
+        "estado": "creada",
+        "destino": {
+          "nodo": 334938533,
+          "lat": -34.5040525,
+          "lon": -58.5274943,
+          "rotulo": {
+            "texto": "Habana y Santiago del Estero",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Habana",
+              "Santiago del Estero"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:09Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-10",
+        "demanda": 1,
+        "estado": "creada",
+        "destino": {
+          "nodo": 346455476,
+          "lat": -34.4985685,
+          "lon": -58.5435154,
+          "rotulo": {
+            "texto": "Avenida Fondo de la Legua",
+            "origen": "via_unica",
+            "calles": [
+              "Avenida Fondo de la Legua"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:10Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-11",
+        "demanda": 3,
+        "estado": "creada",
+        "destino": {
+          "nodo": 338406603,
+          "lat": -34.4977401,
+          "lon": -58.5198527,
+          "rotulo": {
+            "texto": "Avenida Sir Alexander Fleming y Rodríguez Peña",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Avenida Sir Alexander Fleming",
+              "Rodríguez Peña"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:11Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-12",
+        "demanda": 3,
+        "estado": "creada",
+        "destino": {
+          "nodo": 3031613303,
+          "lat": -34.4707978,
+          "lon": -58.537689,
+          "rotulo": {
+            "texto": "Pasaje 2 y Pasaje 5",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Pasaje 2",
+              "Pasaje 5"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:12Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-13",
+        "demanda": 1,
+        "estado": "creada",
+        "destino": {
+          "nodo": 4638943400,
+          "lat": -34.4784563,
+          "lon": -58.5551125,
+          "rotulo": {
+            "texto": "Juan Segundo Fernández",
+            "origen": "via_unica",
+            "calles": [
+              "Juan Segundo Fernández"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:13Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-14",
+        "demanda": 2,
+        "estado": "creada",
+        "destino": {
+          "nodo": 1467711918,
+          "lat": -34.490132,
+          "lon": -58.4855211,
+          "rotulo": {
+            "texto": "Carlos Casares y Pasteur",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Carlos Casares",
+              "Pasteur"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:14Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-15",
+        "demanda": 1,
+        "estado": "creada",
+        "destino": {
+          "nodo": 1863754257,
+          "lat": -34.5061366,
+          "lon": -58.536549,
+          "rotulo": {
+            "texto": "Avenida Fondo de la Legua",
+            "origen": "via_unica",
+            "calles": [
+              "Avenida Fondo de la Legua"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:15Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-16",
+        "demanda": 1,
+        "estado": "creada",
+        "destino": {
+          "nodo": 300752785,
+          "lat": -34.4592658,
+          "lon": -58.5308087,
+          "rotulo": {
+            "texto": "General Paz y Teniente General Lonardi",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "General Paz",
+              "Teniente General Lonardi"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:16Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-17",
+        "demanda": 1,
+        "estado": "creada",
+        "destino": {
+          "nodo": 597717558,
+          "lat": -34.4795227,
+          "lon": -58.5417958,
+          "rotulo": {
+            "texto": "Jacinto Díaz y Madame Marie Curie",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Jacinto Díaz",
+              "Madame Marie Curie"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:17Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-18",
+        "demanda": 3,
+        "estado": "creada",
+        "destino": {
+          "nodo": 1863754257,
+          "lat": -34.5061366,
+          "lon": -58.536549,
+          "rotulo": {
+            "texto": "Avenida Fondo de la Legua",
+            "origen": "via_unica",
+            "calles": [
+              "Avenida Fondo de la Legua"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:18Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-19",
+        "demanda": 1,
+        "estado": "creada",
+        "destino": {
+          "nodo": 597717558,
+          "lat": -34.4795227,
+          "lon": -58.5417958,
+          "rotulo": {
+            "texto": "Jacinto Díaz y Madame Marie Curie",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Jacinto Díaz",
+              "Madame Marie Curie"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:19Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": null
+      },
+      {
+        "id": "orden-20",
+        "demanda": 2,
+        "estado": "creada",
+        "destino": {
+          "nodo": 29886059,
+          "lat": -34.4716552,
+          "lon": -58.507401,
+          "rotulo": {
+            "texto": "Avenida 25 de Mayo y Roque Sáenz Peña",
+            "origen": "cruce_de_calles",
+            "calles": [
+              "Avenida 25 de Mayo",
+              "Roque Sáenz Peña"
+            ]
+          }
+        },
+        "asignacion": null,
+        "historial": [
+          {
+            "estado_anterior": null,
+            "estado_nuevo": "creada",
+            "marca_temporal": "2026-08-24T12:00:20Z",
+            "declarante": null
+          }
+        ],
+        "prioridad": 2,
+        "plazo_comprometido": null,
+        "punto_del_alta": {
+          "lat": -34.4718,
+          "lon": -58.5074
+        }
+      }
+    ]
+  },
+  "nota": "CU-04 con filtro por estado."
+}

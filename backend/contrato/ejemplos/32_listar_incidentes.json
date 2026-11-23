@@ -1,0 +1,33 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/incidentes",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": [
+      {
+        "id": "incidente-de-ejemplo-01",
+        "tipo": "corte_de_calle",
+        "alcance": "parcial",
+        "descripcion": "Corte de calle sobre el recorrido.",
+        "rutas_afectadas": [
+          "ruta-1d8aad4ec546"
+        ],
+        "declarado_en": "2026-08-24T15:00:00Z"
+      },
+      {
+        "id": "incidente-de-ejemplo-02",
+        "tipo": "condicion_climatica_adversa",
+        "alcance": "total",
+        "descripcion": "",
+        "rutas_afectadas": [],
+        "declarado_en": "2026-08-24T15:01:00Z"
+      }
+    ]
+  },
+  "nota": "Por instante de declaracion y, a igual instante, por identificador."
+}

@@ -1,0 +1,11 @@
+# Ni variables con valores reales, ni estado, ni planes guardados (que llevan
+# los valores de las variables), ni el directorio de trabajo de Terraform
+# entran a git. El archivo de bloqueo de proveedores si.
+*.tfvars
+!terraform.tfvars.example
+*.tfplan
+*.tfstate
+*.tfstate.*
+terraform.tfstate*
+.terraform/
+crash.log

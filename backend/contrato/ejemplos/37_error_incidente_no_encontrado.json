@@ -1,0 +1,17 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/incidentes/incidente-inexistente",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 404,
+    "cuerpo": {
+      "codigo": "incidente_no_encontrado",
+      "mensaje": "Incidente incidente-inexistente no existe",
+      "detalle": null
+    }
+  }
+}

@@ -1,0 +1,209 @@
+[project]
+name = "hoppit"
+version = "1.0.0"
+description = "HOPPIT -- plataforma de gestion de flotas y logistica de ultima milla con optimizacion IA"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    # Grafo vial del AMBA: extraccion (preparacion_datos) y manipulacion
+    # del grafo en memoria (cartografia).
+    "osmnx>=2.0",
+    "networkx>=3.0",
+    # Solver CVRP (B-49): VRP capacitado nativo, solucion interpretable.
+    "ortools>=9.10",
+    # Importado directamente por cartografia para el anclaje de Paradas al
+    # grafo; hoy tambien llega como transitiva de OSMnx.
+    "numpy>=1.24",
+    # LaDe (preparacion_datos): descarga del dataset desde Hugging Face y
+    # perfilado de los CSV. Ambas llegan hoy como transitivas de OSMnx, pero
+    # se importan directamente y por eso se declaran.
+    "pandas>=2.0",
+    "requests>=2.31",
+    # Distancia geodesica entre paradas consecutivas de LaDe
+    # (preparacion_datos, B-160). Llega hoy como transitiva de OSMnx, pero se
+    # importa directamente.
+    "pyproj>=3.4",
+    # Figuras del analisis exploratorio de LaDe (tools/figuras_lade.py).
+    "matplotlib>=3.8",
+    # Frontera REST: contrato OpenAPI autogenerado (NFR-06) y tipado de
+    # request/response.
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+    "pydantic>=2.7",
+    # Identidad y acceso (ARQ-55, D-C1): hash de contrasenas con Argon2id, y
+    # token de sesion JWT firmado con EdDSA (Ed25519), que PyJWT verifica con
+    # cryptography.
+    "argon2-cffi>=23.1",
+    "PyJWT>=2.8",
+    "cryptography>=42",
+    # Solo la necesitan click, pytest y tqdm en Windows, pero se declara sin
+    # condicion: los lockfiles (requirements*.txt) se compilan en Linux y, si
+    # no figura aca, quedarian sin ella y `pip --require-hashes` fallaria en
+    # Windows. En Linux no hace nada.
+    "colorama>=0.4",
+]
+
+[project.optional-dependencies]
+# Entrenamiento fuera de linea (B-233 puntos 6 y 7, DAT-38 punto 8): el
+# boosting de ETA por cuantiles y el agente DQN de la etapa 1. Solo las usan
+# herramientas de tools/; ningun modulo de src/ las importa (lo verifica
+# tests/shared/test_dependencias_de_entrenamiento.py) y el servidor no las
+# necesita. PyTorch, en su rueda para CPU.
+entrenamiento = [
+    "scikit-learn>=1.5",
+    "scipy>=1.13",
+    "torch>=2.4",
+]
+dev = [
+    "pytest>=8",
+    "import-linter>=2",
+    "mypy>=1.10",
+    "types-networkx>=3",
+    # Cliente HTTP que usa fastapi.testclient para ejercitar la API en
+    # proceso, sin levantar un servidor.
+    "httpx>=0.27",
+    # Valida el esquema publicado contra la especificacion OpenAPI. Que
+    # FastAPI lo genere no garantiza que un cliente de API pueda importarlo.
+    "openapi-spec-validator>=0.7",
+    # Iconos de la pestana a partir del isotipo (tools/generar_iconos.py,
+    # 2026-10-20C, G). El servidor no la usa.
+    "pillow>=10",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# Los textos de terminos y consentimientos viajan con el paquete: el
+# servicio de identidad los lee y verifica su SHA-256 al arrancar (ARQ-56).
+[tool.setuptools.package-data]
+"hoppit.frontera.identidad" = ["terminos/*.md", "terminos/*.json"]
+
+[tool.importlinter]
+root_package = "hoppit"
+
+# Los contratos de abajo son la version ejecutable de la seccion
+# "Estructura y limites de import" de CLAUDE.md. La regla 1 de esa seccion
+# (ningun modulo importa un `_privado.py` de otro paquete) no esta aca sino
+# en tools/check_boundaries.py, y no por duplicacion: import-linter la
+# marcaria como violacion tambien cuando el acceso es legitimo e indirecto
+# -- planificacion_rutas.puerto -> cartografia.puerto -> cartografia._grafo
+# es exactamente el uso correcto del puerto y aparece como cadena
+# prohibida. check_boundaries.py mira el import literal de cada archivo,
+# que es lo que la convencion prohibe. Una sola fuente de verdad por regla:
+# la 1 vive alli, las 2 a 5 viven aca.
+
+# Los servicios hoja no deberian acoplarse entre si, ni directa ni
+# transitivamente. Planificacion de Rutas queda afuera de este contrato a
+# proposito: es el unico hub legitimo que combina Gestion de Ordenes y
+# Cartografia (ARQ-N2-PLA).
+[[tool.importlinter.contracts]]
+name = "Los servicios hoja son independientes entre si"
+type = "independence"
+modules = [
+    "hoppit.gestion_ordenes",
+    "hoppit.cartografia",
+    "hoppit.seguimiento_flota",
+    "hoppit.prediccion_eta",
+    "hoppit.vigilancia_sla",
+    "hoppit.preparacion_datos",
+    "hoppit.entorno_simulacion",
+]
+
+# Regla 2. El plano offline (ARQ-23) se comunica con el nucleo por artefacto
+# versionado en disco, no por import: Preparacion de Datos escribe el grafo,
+# Cartografia lo lee de ahi (ARQ-14, ARQ-21). Se solapa a proposito con el
+# contrato de independencia -- este lo extiende al hub, a frontera y al
+# composition root, que no son hojas.
+[[tool.importlinter.contracts]]
+name = "El nucleo no importa el plano offline"
+type = "forbidden"
+source_modules = [
+    "hoppit.gestion_ordenes",
+    "hoppit.cartografia",
+    "hoppit.planificacion_rutas",
+    "hoppit.seguimiento_flota",
+    "hoppit.prediccion_eta",
+    "hoppit.vigilancia_sla",
+    "hoppit.frontera",
+    "hoppit.shared",
+    "hoppit.bootstrap",
+]
+forbidden_modules = [
+    "hoppit.preparacion_datos",
+    "hoppit.entorno_simulacion",
+]
+
+# Regla 3. Identidad es transversal (ARQ-16), no un adaptador mas: los
+# cuatro adaptadores con actor externo propio pueden importar su puerto
+# para verificar credenciales, pero la dependencia va en un solo sentido.
+[[tool.importlinter.contracts]]
+name = "Identidad no depende de sus hermanos de frontera"
+type = "forbidden"
+source_modules = ["hoppit.frontera.identidad"]
+forbidden_modules = [
+    "hoppit.frontera.api_rest",
+    "hoppit.frontera.telemetria",
+    "hoppit.frontera.operacion",
+    "hoppit.frontera.presentacion",
+]
+
+# Regla 4. Las implementaciones concretas del motor (D1 solver, D2 DQN) se
+# alcanzan por la interfaz de motor/base.py; nadie fuera de motor/ las
+# nombra. Unica excepcion, deliberada: planificacion_rutas.puerto, que como
+# punto de ensamblado del container es el que elige que implementacion
+# instanciar (ARQ-30) -- cambiar de D1 a D2 es cambiar esa linea.
+# allow_indirect_imports acota el contrato al import literal: sin eso, todo
+# el que use el puerto quedaria marcado por la cadena que pasa por el.
+[[tool.importlinter.contracts]]
+name = "Las implementaciones del motor solo se alcanzan por su interfaz"
+type = "forbidden"
+allow_indirect_imports = true
+source_modules = [
+    "hoppit.gestion_ordenes",
+    "hoppit.cartografia",
+    "hoppit.seguimiento_flota",
+    "hoppit.prediccion_eta",
+    "hoppit.vigilancia_sla",
+    "hoppit.preparacion_datos",
+    "hoppit.entorno_simulacion",
+    "hoppit.frontera",
+    "hoppit.shared",
+    "hoppit.bootstrap",
+    "hoppit.planificacion_rutas._adaptador_contexto",
+    "hoppit.planificacion_rutas._ensamblador_instancia",
+    "hoppit.planificacion_rutas._publicador",
+    "hoppit.planificacion_rutas._receptor",
+    "hoppit.planificacion_rutas._repositorio",
+]
+forbidden_modules = [
+    "hoppit.planificacion_rutas.motor._solver_vrp",
+    "hoppit.planificacion_rutas.motor._politica_dqn",
+]
+
+# Regla 5. shared/ es infraestructura comun: cualquiera la importa, ella no
+# importa a nadie. Es lo que la mantiene extraible sin arrastrar negocio.
+[[tool.importlinter.contracts]]
+name = "shared no depende de ningun modulo de negocio"
+type = "forbidden"
+source_modules = ["hoppit.shared"]
+forbidden_modules = [
+    "hoppit.gestion_ordenes",
+    "hoppit.cartografia",
+    "hoppit.planificacion_rutas",
+    "hoppit.seguimiento_flota",
+    "hoppit.prediccion_eta",
+    "hoppit.vigilancia_sla",
+    "hoppit.preparacion_datos",
+    "hoppit.entorno_simulacion",
+    "hoppit.frontera",
+    "hoppit.bootstrap",
+]
+
+[tool.mypy]
+
+[[tool.mypy.overrides]]
+module = ["osmnx.*", "shapely.*", "pandas.*", "requests.*", "ortools.*"]
+ignore_missing_imports = true

@@ -1,0 +1,18 @@
+{
+  "artefacto": "factor_por_jornada",
+  "ambito": "Hangzhou",
+  "fuente": "LaDe-D, delivery_hz.csv: intervalos R2 de los dias de entrenamiento de la particion temporal",
+  "herramienta": "tools/factor_por_jornada_lade.py",
+  "momento_utc": "2026-10-12T21:42:36.692511+00:00",
+  "parametros": {
+    "regimen": "R2",
+    "umbral_de_intervalos_por_transportista_dia": 10,
+    "transportistas_dia": 39567,
+    "definicion": "f = exp(mediana de r), r = ln(intervalo / mediana de su celda y franja)",
+    "mediana_sin_normalizar": 1.0,
+    "normalizacion": "cada f dividido por la mediana de los f",
+    "sorteo": "valor de orden floor(u * n) de la columna, que esta ordenada",
+    "sha256_de_la_tabla_de_entrenamiento": "439fb31cf05e12e1f421d427b815612343a6291829330a61e15a07a2c117d228",
+    "sha256": "b6284528dee833cd66e77f1598aa72f2360eb41a32a2dd02aec57bc737a059c5"
+  }
+}

@@ -1,0 +1,10 @@
+# Entorno del despliegue local en el equipo (infra/compose.local.yaml).
+# No es secreto: las claves de firma se leen de HOPPIT_RAIZ_DE_DATOS/secretos,
+# que se crea a mano con tools/generar_claves_de_firma.py --directorio.
+HOPPIT_DOMINIO=:80
+HOPPIT_REGISTRO=local
+VERSION_BORDE=local
+VERSION_NUCLEO=local
+VERSION_TELEMETRIA=local
+# Relativa a la carpeta infra/: una carpeta del arbol de trabajo fuera de git.
+HOPPIT_RAIZ_DE_DATOS=../backend/datos/tmp/despliegue_local

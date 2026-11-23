@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOPPIT · Inicio</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icono-180.png">
+
+<link rel="stylesheet" href="vendor/fuentes/fuentes.css">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<div class="topbar">
+  <span class="wordmark">HOPPIT</span>
+  <span class="vr"></span>
+  <span class="screen-title">Inicio</span>
+  <span class="spacer"></span>
+  <!-- La jornada del resumen: hoy por omisión, y se puede pasar a otro día. -->
+  <div class="datectl">
+    <label class="cap" for="fecha">Jornada</label>
+    <input class="val fecha-input" type="date" id="fecha">
+  </div>
+  <a class="btn btn-con-icono" href="orden.html" id="cab-registrar"></a>
+</div>
+
+<!-- Inicio (DFE-12; rediseño 2026-11 con la propuesta aprobada). El resumen
+     sale solo de operaciones existentes del contrato: ninguna operación nueva
+     del backend. -->
+<main class="pagina">
+  <div class="cuerpo-ancho">
+    <div class="saludo">
+      <h1 id="saludo">Jornada de hoy</h1>
+      <p id="saludo-bajada">Lo que hay para hacer hoy y por dónde seguir.</p>
+    </div>
+
+    <div class="kpis" id="resumen" aria-live="polite">
+      <p class="cargando">Cargando el resumen…</p>
+    </div>
+
+    <div class="grid-inicio">
+      <div class="columna">
+        <section class="tarjeta">
+          <div class="sec-h"><h2>Recorrido de la jornada</h2><span class="eyebrow" id="paso-actual"></span></div>
+          <div class="pasos" id="pasos"><p class="cargando">Cargando…</p></div>
+        </section>
+        <section class="tarjeta">
+          <div class="sec-h"><h2>Accesos rápidos</h2></div>
+          <div class="accesos" id="accesos"></div>
+        </section>
+      </div>
+      <div class="columna">
+        <section class="tarjeta">
+          <div class="sec-h"><h2>Últimas Órdenes</h2><a href="ordenes.html">Ver todas →</a></div>
+          <div class="lista-mini" id="ultimas"><p class="cargando">Cargando…</p></div>
+        </section>
+        <section class="tarjeta">
+          <div class="sec-h"><h2>Alertas</h2><a href="alertas.html">Ver alertas →</a></div>
+          <div id="alertas-mini"><p class="cargando">Cargando…</p></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="js/inicio.js"></script>
+</body>
+</html>

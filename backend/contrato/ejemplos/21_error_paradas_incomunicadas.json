@@ -1,0 +1,29 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/planificaciones",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {}
+  },
+  "respuesta": {
+    "estado": 409,
+    "cuerpo": {
+      "codigo": "paradas_incomunicadas",
+      "mensaje": "Destinos fuera de la componente fuertemente conexa mayor: [113094208]. Ningun par que los involucre tiene camino en los dos sentidos.",
+      "detalle": {
+        "motivo": "fuera_de_la_componente",
+        "paradas": [
+          {
+            "nodo": 113094208,
+            "pares_afectados": 0,
+            "rotulo": "Amancio Alcorta y Paraná"
+          }
+        ],
+        "pares": []
+      }
+    }
+  },
+  "nota": "CU-02 flujo 3a (RB-05). Una Parada sin camino con el resto. No se produce plan. Las Paradas causantes vienen agrupadas y rotuladas, para poder senalarlas en la pantalla. ATENCION al campo `pares`: depende de `motivo`. Con `fuera_de_la_componente` --el caso de este ejemplo y el unico alcanzable sobre el grafo real, porque el destino se verifica antes de calcular ningun camino-- llega VACIO, y `pares_afectados` es 0: no se calculo ningun camino, y enumerar pares que no se midieron seria inventarlos. Con `sin_camino_entre_pares` llega la totalidad de los pares y `pares_afectados` cuenta en cuantos participa cada Parada. La interfaz tiene que contemplar los dos casos."
+}

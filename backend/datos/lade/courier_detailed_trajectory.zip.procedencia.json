@@ -1,0 +1,18 @@
+{
+  "artefacto": "lade",
+  "ambito": "trayectorias y archivos asociados, todas las ciudades",
+  "fuente": "Hugging Face Hub -- datasets/Cainiao-AI/LaDe",
+  "herramienta": "requests 2.34.2",
+  "momento_utc": "2026-10-05T04:12:16.688295+00:00",
+  "parametros": {
+    "repositorio": "Cainiao-AI/LaDe",
+    "revision": "be2cec02775cafc8d52230303f32134382bcc50b",
+    "ruta_remota": "courier_detailed_trajectory.zip",
+    "url": "https://huggingface.co/datasets/Cainiao-AI/LaDe/resolve/be2cec02775cafc8d52230303f32134382bcc50b/courier_detailed_trajectory.zip",
+    "bytes": 160005925,
+    "sha256": "68ca61378d5521844abab0249d72bc340e6aa24e9d6b11a64ced4a6f06b9d098",
+    "licencia": "CC BY-NC 4.0",
+    "fuente_de_la_licencia": "paper de LaDe (SIGKDD 2024), seccion 3.1 y datasheet C.6",
+    "licencia_discrepante_en_hugging_face": "apache-2.0"
+  }
+}

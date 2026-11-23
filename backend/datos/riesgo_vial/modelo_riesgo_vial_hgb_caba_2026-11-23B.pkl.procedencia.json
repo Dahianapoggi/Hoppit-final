@@ -1,0 +1,51 @@
+{
+ "version": "2026-11-23B",
+ "archivo": "modelo_riesgo_vial_hgb_caba_2026-11-23B.pkl",
+ "formato": "pickle de sklearn (protocolo 5) verificado con pickletools antes de cargarlo",
+ "globales": [
+  "builtins.slice",
+  "functools.partial",
+  "numpy._core.multiarray._reconstruct",
+  "numpy._core.multiarray.scalar",
+  "numpy._core.numeric._frombuffer",
+  "numpy.dtype",
+  "numpy.float64",
+  "numpy.ndarray",
+  "numpy.random._pcg64.PCG64",
+  "numpy.random._pickle.__bit_generator_ctor",
+  "numpy.random._pickle.__generator_ctor",
+  "numpy.random.bit_generator.SeedSequence",
+  "numpy.random.bit_generator.__pyx_unpickle_SeedSequence",
+  "sklearn._loss._loss.CyHalfPoissonLoss",
+  "sklearn._loss.link.Interval",
+  "sklearn._loss.link.LogLink",
+  "sklearn._loss.loss.HalfPoissonLoss",
+  "sklearn.compose._column_transformer.ColumnTransformer",
+  "sklearn.ensemble._hist_gradient_boosting.binning._BinMapper",
+  "sklearn.ensemble._hist_gradient_boosting.gradient_boosting.HistGradientBoostingRegressor",
+  "sklearn.ensemble._hist_gradient_boosting.predictor.TreePredictor",
+  "sklearn.preprocessing._encoders.OrdinalEncoder",
+  "sklearn.preprocessing._function_transformer.FunctionTransformer",
+  "sklearn.utils.validation.check_array"
+ ],
+ "permitidos": [
+  "sklearn.",
+  "numpy.",
+  "builtins.",
+  "copyreg.",
+  "_codecs.",
+  "collections.",
+  "functools.partial"
+ ],
+ "cargado_predice_igual": true,
+ "sklearn": "1.9.1",
+ "parametros": {
+  "learning_rate": 0.05,
+  "max_leaf_nodes": 15,
+  "min_samples_leaf": 1000,
+  "max_iter": 400
+ },
+ "sha256": "930949bac8a938eae69a70466a9a8154d07fc732ed71150d0e232ded35e7ffef",
+ "tabla": "riesgo_por_arco_caba_2026-11-23B.csv",
+ "procedencia": "encargo 2026-11-23B, bloque R (referencia/informes/2026-11-23B_anexos/scripts/r_seleccion.py)"
+}

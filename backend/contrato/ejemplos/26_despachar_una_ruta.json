@@ -1,0 +1,25 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/rutas/ruta-1d8aad4ec546/despacho",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "ruta_id": "ruta-1d8aad4ec546",
+      "ordenes": [
+        "orden-00",
+        "orden-02",
+        "orden-14",
+        "orden-06",
+        "orden-07",
+        "orden-03"
+      ],
+      "estado": "en_transito"
+    }
+  },
+  "nota": "FR-16. Registra el inicio de la ejecucion de la Ruta: sus Ordenes pasan de Planificada a En transito, con la transicion en su historial. La Ruta no tiene estados (B-96): el despacho queda en sus Ordenes."
+}

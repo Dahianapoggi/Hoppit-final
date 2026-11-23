@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOPPIT · Órdenes</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icono-180.png">
+
+<link rel="stylesheet" href="vendor/fuentes/fuentes.css">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="pantalla-ordenes">
+
+<div class="topbar">
+  <span class="wordmark">HOPPIT</span>
+  <span class="vr"></span>
+  <span class="screen-title">Órdenes</span>
+  <span class="spacer"></span>
+  <label class="buscador"><span class="sr">Buscar Órdenes</span>
+    <input id="filtro-texto" type="search" placeholder="Buscar Orden o dirección" autocomplete="off"></label>
+  <label class="chip-select"><span>Jornada del plan:</span>
+    <select id="filtro-jornada"><option value="">todas</option></select></label>
+  <a class="btn btn-con-icono" href="orden.html"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>Registrar Orden</a>
+</div>
+
+<!-- Lista de Órdenes (DFE-29; rediseño 2026-11 con la propuesta aprobada).
+     Sólo operaciones existentes: GET /v1/ordenes, GET /v1/ordenes/{id} y
+     GET /v1/rutas. -->
+<main class="pagina">
+  <div class="cuerpo-ancho ordenes-pagina">
+    <div class="filtro-chips" id="filtro-estado" role="group" aria-label="Filtrar por estado"></div>
+
+    <div class="ordenes-grid">
+      <section class="tarjeta ordenes-lista">
+        <div id="lista"><p class="cargando">Cargando las Órdenes…</p></div>
+      </section>
+      <section class="tarjeta det" id="detalle" aria-live="polite">
+        <p class="vacio-texto">Elegí una Orden de la lista para ver su detalle.</p>
+      </section>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="js/ordenes.js"></script>
+</body>
+</html>

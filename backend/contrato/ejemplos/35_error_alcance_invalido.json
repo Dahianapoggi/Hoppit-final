@@ -1,0 +1,22 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/incidentes",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "tipo": "desvio",
+      "alcance": "medio"
+    }
+  },
+  "respuesta": {
+    "estado": 422,
+    "cuerpo": {
+      "codigo": "alcance_invalido",
+      "mensaje": "Alcance 'medio': tiene que ser total o parcial",
+      "detalle": null
+    }
+  },
+  "nota": "El alcance es total o parcial."
+}

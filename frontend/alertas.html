@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOPPIT · Alertas</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icono-180.png">
+
+<link rel="stylesheet" href="vendor/fuentes/fuentes.css">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="pantalla-alertas">
+
+<div class="topbar">
+  <span class="wordmark">HOPPIT</span>
+  <span class="vr"></span>
+  <span class="screen-title">Alertas</span>
+  <div class="datectl">
+    <label class="cap" for="fecha">Jornada</label>
+    <input class="val fecha-input" type="date" id="fecha">
+  </div>
+  <span class="spacer"></span>
+  <span class="pulso" id="evaluadas"></span>
+</div>
+
+<!-- Alertas (DFE-36; rediseño 2026-11 con la propuesta aprobada). Usa solo
+     GET /v1/alertas: las alertas se calculan al consultar y no se guardan, y
+     mirarlas no cambia ninguna Orden ni ninguna Ruta (CU-08). -->
+<main class="pagina">
+  <div class="cuerpo-ancho">
+    <p class="bajada">Avisos que el sistema calcula por reglas. Mirarlas <b>no cambia nada</b>: ni Órdenes ni Rutas.</p>
+
+    <div class="al-resumen" id="resumen"></div>
+
+    <section class="tarjeta">
+      <div class="sec-h"><h2>Vigentes</h2><span class="eyebrow" id="cuenta"></span></div>
+      <div id="lista" aria-live="polite"><p class="cargando">Consultando las alertas…</p></div>
+    </section>
+  </div>
+</main>
+
+<script type="module" src="js/alertas.js"></script>
+</body>
+</html>

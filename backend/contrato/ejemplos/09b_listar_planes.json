@@ -1,0 +1,28 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/planes",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": [
+      {
+        "id": "plan-4fb83887caaf",
+        "fecha_planificacion": "2026-08-24",
+        "cantidad_rutas": 3,
+        "cantidad_paradas": 19,
+        "demanda_total": 34,
+        "distancia_total_m": 45467.901622340396,
+        "vehiculos": [
+          "AE472LP",
+          "AF815MT",
+          "AG309RB"
+        ]
+      }
+    ]
+  },
+  "nota": "Los Planes de Distribucion con sus totales (glosario, entidad 13). Es la unidad de lectura por encima de la Ruta: los totales vienen calculados y no hay que sumar el listado de Rutas, suma que deja de ser correcta en cuanto conviven varios Planes en una jornada. `vehiculos` son los que el Plan ocupa, y por lo tanto no estan disponibles para otra corrida del mismo dia. Filtrable por ?fecha=."
+}

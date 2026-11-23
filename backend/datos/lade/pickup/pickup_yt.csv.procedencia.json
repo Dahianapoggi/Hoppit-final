@@ -1,0 +1,20 @@
+{
+  "artefacto": "lade",
+  "ambito": "Yantai",
+  "fuente": "Hugging Face Hub -- datasets/Cainiao-AI/LaDe",
+  "herramienta": "requests 2.34.2",
+  "momento_utc": "2026-08-17T04:21:58.318897+00:00",
+  "parametros": {
+    "repositorio": "Cainiao-AI/LaDe",
+    "revision": "be2cec02775cafc8d52230303f32134382bcc50b",
+    "subconjunto": "pickup",
+    "codigo_ciudad": "yt",
+    "ruta_remota": "pickup/pickup_yt.csv",
+    "url": "https://huggingface.co/datasets/Cainiao-AI/LaDe/resolve/be2cec02775cafc8d52230303f32134382bcc50b/pickup/pickup_yt.csv",
+    "bytes": 190190713,
+    "sha256": "00c049925a41d92112795718021f348da07f1adb84002de3f5707aef6ac01e91",
+    "licencia": "CC BY-NC 4.0",
+    "fuente_de_la_licencia": "paper de LaDe (SIGKDD 2024), seccion 3.1 y datasheet C.6",
+    "licencia_discrepante_en_hugging_face": "apache-2.0"
+  }
+}

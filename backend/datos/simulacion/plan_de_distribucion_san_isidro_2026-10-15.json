@@ -1,0 +1,151 @@
+{
+  "identificador_del_plan": "plan-a2da58df5c05",
+  "rutas": [
+    {
+      "vehiculo": "AE472LP",
+      "distancia_m": 15297.858514840344,
+      "paradas": [
+        {
+          "secuencia": 1,
+          "nodo": 299362038,
+          "ordenes": [
+            "orden-00"
+          ]
+        },
+        {
+          "secuencia": 2,
+          "nodo": 299742786,
+          "ordenes": [
+            "orden-02"
+          ]
+        },
+        {
+          "secuencia": 3,
+          "nodo": 1467711918,
+          "ordenes": [
+            "orden-14"
+          ]
+        },
+        {
+          "secuencia": 4,
+          "nodo": 4338770173,
+          "ordenes": [
+            "orden-06"
+          ]
+        },
+        {
+          "secuencia": 5,
+          "nodo": 424007348,
+          "ordenes": [
+            "orden-07"
+          ]
+        },
+        {
+          "secuencia": 6,
+          "nodo": 299362802,
+          "ordenes": [
+            "orden-03"
+          ]
+        }
+      ]
+    },
+    {
+      "vehiculo": "AF815MT",
+      "distancia_m": 21060.89975936916,
+      "paradas": [
+        {
+          "secuencia": 1,
+          "nodo": 333730672,
+          "ordenes": [
+            "orden-05"
+          ]
+        },
+        {
+          "secuencia": 2,
+          "nodo": 4638943400,
+          "ordenes": [
+            "orden-13"
+          ]
+        },
+        {
+          "secuencia": 3,
+          "nodo": 661100305,
+          "ordenes": [
+            "orden-01"
+          ]
+        },
+        {
+          "secuencia": 4,
+          "nodo": 300752785,
+          "ordenes": [
+            "orden-16"
+          ]
+        },
+        {
+          "secuencia": 5,
+          "nodo": 3031450027,
+          "ordenes": [
+            "orden-04"
+          ]
+        },
+        {
+          "secuencia": 6,
+          "nodo": 3031613303,
+          "ordenes": [
+            "orden-12"
+          ]
+        },
+        {
+          "secuencia": 7,
+          "nodo": 597717558,
+          "ordenes": [
+            "orden-17",
+            "orden-19"
+          ]
+        },
+        {
+          "secuencia": 8,
+          "nodo": 346455476,
+          "ordenes": [
+            "orden-10"
+          ]
+        }
+      ]
+    },
+    {
+      "vehiculo": "AG309RB",
+      "distancia_m": 5086.321031570471,
+      "paradas": [
+        {
+          "secuencia": 1,
+          "nodo": 1863754257,
+          "ordenes": [
+            "orden-15",
+            "orden-18"
+          ]
+        },
+        {
+          "secuencia": 2,
+          "nodo": 334938533,
+          "ordenes": [
+            "orden-09"
+          ]
+        },
+        {
+          "secuencia": 3,
+          "nodo": 338407656,
+          "ordenes": [
+            "orden-08"
+          ]
+        },
+        {
+          "secuencia": 4,
+          "nodo": 338406603,
+          "ordenes": [
+            "orden-11"
+          ]
+        }
+      ]
+    }
+  ]
+}

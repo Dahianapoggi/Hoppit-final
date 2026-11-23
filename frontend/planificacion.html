@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOPPIT · Nueva planificación</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icono-180.png">
+
+<!-- IBM Plex vendorizado, no por red (FE-05). Mismo criterio que Leaflet. -->
+<link rel="stylesheet" href="vendor/fuentes/fuentes.css">
+
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="pantalla-planificar">
+
+<div class="topbar">
+  <span class="wordmark">HOPPIT</span>
+  <span class="vr"></span>
+  <h1 class="screen-title">Nueva planificación</h1>
+  <span class="crumb" id="crumb"></span>
+  <!-- La jornada para la que se compone. Llega de G1-A, que es donde vive el
+       calendario: acá se muestra, no se elige. Decide qué Vehículos están
+       disponibles y si la acción de planificar está habilitada. -->
+  <span class="jornada" id="jornada"></span>
+  <span class="spacer"></span>
+  <a class="btn-txt" id="volver-al-plan" href="index.html">Cancelar</a>
+  <a class="btn-ghost btn-con-icono" href="orden.html"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>Registrar Orden</a>
+</div>
+
+<div class="body">
+  <div class="rail">
+
+    <!-- El Depósito se presenta como contexto fijo, sin selector (PUX-27):
+         operar con más de un Depósito es el flujo 1a de CU-02. -->
+    <div class="sec">
+      <div class="eyebrow"><span>Depósito</span><span>origen y retorno</span></div>
+      <div id="deposito"></div>
+    </div>
+
+    <div class="sec">
+      <div class="eyebrow"><span>Flota</span><span id="flota-cuenta"></span></div>
+      <div id="flota"></div>
+    </div>
+
+    <!-- Sólo aparece cuando hay un plan vigente. Descartarlo es la operación
+         que el glosario define en el estado Planificada: la desasignación
+         descarta la Ruta y libera todas sus Órdenes. -->
+    <div class="sec" id="plan-vigente" hidden></div>
+
+    <!-- El balance y el disparo van en una sola tarjeta oscura (propuesta de
+         2026-11): lo que se eligió y lo que se hace con eso. -->
+    <div class="balance-tarjeta">
+      <div class="balance" id="balance"></div>
+
+      <div class="acciones">
+        <button class="btn-ancho" id="btn-planificar" disabled>Planificar rutas</button>
+        <!-- PUX-30: NFR-07 traducido a lenguaje de operador. -->
+        <div class="hint" id="hint">Seleccioná al menos una Orden.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="mainhead">
+      <h2>Órdenes a planificar</h2>
+      <div class="tabs">
+        <button class="tab on" data-estado="creada">Creadas <span class="n" id="n-creadas">—</span></button>
+        <button class="tab" data-estado="planificada">Planificadas <span class="n" id="n-planificadas">—</span></button>
+        <button class="tab" data-estado="en_ejecucion">En ejecución <span class="n" id="n-en-ejecucion">—</span></button>
+      </div>
+      <label class="filtro-texto"><span class="sr">Buscar Órdenes</span>
+        <input id="filtro-texto" type="search" placeholder="Buscar por Orden o destino" autocomplete="off"></label>
+    </div>
+
+    <div id="selbar"></div>
+
+    <div class="tabla-scroll" id="tabla"><p class="cargando" style="padding:20px 24px">Cargando las Órdenes…</p></div>
+  </div>
+</div>
+
+<script type="module" src="js/planificacion.js"></script>
+</body>
+</html>

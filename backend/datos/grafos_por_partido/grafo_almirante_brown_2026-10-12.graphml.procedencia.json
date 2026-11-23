@@ -1,0 +1,17 @@
+{
+  "artefacto": "grafo",
+  "ambito": "Almirante Brown",
+  "fuente": "OpenStreetMap via Overpass API",
+  "herramienta": "osmnx 2.0.7",
+  "momento_utc": "2026-10-12T22:01:42.757376+00:00",
+  "parametros": {
+    "consulta": "Partido de Almirante Brown, Provincia de Buenos Aires, Argentina",
+    "tipo_red": "drive",
+    "simplificado": true,
+    "area_nombre_completo": "Partido de Almirante Brown, Buenos Aires, Argentina",
+    "area_tipo_osm": "relation",
+    "area_id_osm": 2402606,
+    "area_km2": 128.99,
+    "sha256": "bf5ca4db194863422218628d4b23ba4db363803cd1e8262147be9bdefc6f5947"
+  }
+}

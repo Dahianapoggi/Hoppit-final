@@ -1,0 +1,27 @@
+{
+  "peticion": {
+    "metodo": "DELETE",
+    "ruta": "/v1/rutas/ruta-6a930ceb70b2",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "ruta_invalidada": "ruta-6a930ceb70b2",
+      "ordenes_liberadas": [
+        "orden-05",
+        "orden-13",
+        "orden-01",
+        "orden-16",
+        "orden-04",
+        "orden-12",
+        "orden-17",
+        "orden-19",
+        "orden-10"
+      ]
+    }
+  },
+  "nota": "La misma operacion entrando por la Ruta. Es la via natural para replanificar una corrida entera: se invalida la Ruta y todas sus Ordenes vuelven a estar disponibles. Sin esto, una segunda planificacion no encuentra nada que planificar."
+}

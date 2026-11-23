@@ -1,0 +1,45 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/rutas/ruta-1d8aad4ec546/despacho",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 409,
+    "cuerpo": {
+      "codigo": "ruta_ya_despachada",
+      "mensaje": "La Ruta ruta-1d8aad4ec546 ya fue despachada: sus Ordenes no estan en Planificada. Estados: orden-00 en Completada, orden-02 en En tránsito, orden-03 en En tránsito, orden-06 en En tránsito, orden-07 en En tránsito, orden-14 en En tránsito.",
+      "detalle": {
+        "ordenes": [
+          {
+            "orden": "orden-00",
+            "estado": "completada"
+          },
+          {
+            "orden": "orden-02",
+            "estado": "en_transito"
+          },
+          {
+            "orden": "orden-03",
+            "estado": "en_transito"
+          },
+          {
+            "orden": "orden-06",
+            "estado": "en_transito"
+          },
+          {
+            "orden": "orden-07",
+            "estado": "en_transito"
+          },
+          {
+            "orden": "orden-14",
+            "estado": "en_transito"
+          }
+        ]
+      }
+    }
+  },
+  "nota": "Una Ruta se despacha una sola vez. El detalle lleva cada Orden con su estado."
+}

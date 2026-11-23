@@ -1,0 +1,10 @@
+# Artefactos versionados de datos y sus sidecars: sin conversion de fin de
+# linea (B-180). Su SHA-256 se registra en el sidecar y se verifica al
+# leerlos, asi que tienen que ser los mismos bytes en git y en cualquier
+# checkout, con core.autocrlf o sin el. `-text` solo apaga la conversion:
+# los diffs siguen funcionando.
+backend/datos/** -text
+# Textos de terminos y consentimientos (ARQ-56): su SHA-256 se registra en
+# terminos/vigentes.json y se verifica al arrancar. El lector normaliza el fin
+# de linea, y ademas se guardan sin conversion, como los artefactos de datos.
+backend/src/hoppit/frontera/identidad/terminos/** -text

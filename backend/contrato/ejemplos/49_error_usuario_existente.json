@@ -1,0 +1,21 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/registros",
+    "cuerpo": {
+      "codigo": "<codigo de invitacion: de un solo uso, omitido en los ejemplos>",
+      "usuario": "registro-de-ejemplo",
+      "nombre_visible": "Cuenta registrada de ejemplo",
+      "contrasena": "<contrasena: omitida en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 409,
+    "cuerpo": {
+      "codigo": "usuario_existente",
+      "mensaje": "El usuario registro-de-ejemplo ya existe: hay que elegir otro nombre",
+      "detalle": null
+    }
+  },
+  "nota": "Con un codigo valido y un nombre de usuario tomado. Sin codigo valido, la respuesta es la del ejemplo 48."
+}

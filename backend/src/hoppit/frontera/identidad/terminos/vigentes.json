@@ -1,0 +1,17 @@
+{
+  "terminos_de_uso": {
+    "version": 2,
+    "archivo": "terminos_de_uso_v2.md",
+    "sha256": "32bf4487cc987cdd0c4da2a20300c2862098f5e673389fea0df5d96e180af6ad"
+  },
+  "consentimiento_transferencia_internacional": {
+    "version": 2,
+    "archivo": "consentimiento_transferencia_internacional_v2.md",
+    "sha256": "213cace99ac5aecfa31716139eed6ca38b2cc0075e827408f166e3db0830a367"
+  },
+  "consentimiento_geolocalizacion": {
+    "version": 2,
+    "archivo": "consentimiento_geolocalizacion_v2.md",
+    "sha256": "53ec4b73a95024447a6a45f153face7b352e886c45b5fb99e05b9320a48b94c4"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/sesiones",
+    "cuerpo": {
+      "usuario": "operador-de-ejemplo",
+      "contrasena": "<contrasena: omitida en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 201,
+    "cuerpo": {
+      "token": "<token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>",
+      "tipo": "Bearer",
+      "vence_en": "2026-08-24T21:00:00Z",
+      "rol": "operador",
+      "nombre_visible": "Usuario de ejemplo",
+      "pendientes": [
+        {
+          "documento": "terminos_de_uso",
+          "version": 2,
+          "sha256": "32bf4487cc987cdd0c4da2a20300c2862098f5e673389fea0df5d96e180af6ad",
+          "titulo": "Términos de uso de HOPPIT"
+        },
+        {
+          "documento": "consentimiento_transferencia_internacional",
+          "version": 2,
+          "sha256": "213cace99ac5aecfa31716139eed6ca38b2cc0075e827408f166e3db0830a367",
+          "titulo": "Consentimiento para la transferencia internacional de datos"
+        }
+      ]
+    }
+  },
+  "nota": "Ingreso con usuario y contrasena. Responde el token (JWT EdDSA, que va en `Authorization: Bearer` en cada pedido; aca, con un marcador), su vencimiento (10 h para el operador, 16 h para el transportista), el rol, el nombre visible y los documentos que faltan aceptar. Mientras falte alguno, el resto de las operaciones responde 403 `terminos_no_aceptados`."
+}

@@ -1,0 +1,20 @@
+{
+  "artefacto": "lade",
+  "ambito": "Chongqing",
+  "fuente": "Hugging Face Hub -- datasets/Cainiao-AI/LaDe",
+  "herramienta": "requests 2.34.2",
+  "momento_utc": "2026-08-17T04:20:47.630871+00:00",
+  "parametros": {
+    "repositorio": "Cainiao-AI/LaDe",
+    "revision": "be2cec02775cafc8d52230303f32134382bcc50b",
+    "subconjunto": "pickup",
+    "codigo_ciudad": "cq",
+    "ruta_remota": "pickup/pickup_cq.csv",
+    "url": "https://huggingface.co/datasets/Cainiao-AI/LaDe/resolve/be2cec02775cafc8d52230303f32134382bcc50b/pickup/pickup_cq.csv",
+    "bytes": 190522468,
+    "sha256": "d58248d1aca9cf155bd202f311dff73f8562174d4e4041160a3996878143b056",
+    "licencia": "CC BY-NC 4.0",
+    "fuente_de_la_licencia": "paper de LaDe (SIGKDD 2024), seccion 3.1 y datasheet C.6",
+    "licencia_discrepante_en_hugging_face": "apache-2.0"
+  }
+}

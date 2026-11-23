@@ -1,0 +1,20 @@
+{
+  "artefacto": "plan_de_distribucion",
+  "ambito": "San Isidro",
+  "fuente": "instancia canonica de demostracion (tools/escenario_demostracion.py) armada por tools/servir_api.construir_contexto",
+  "herramienta": "hoppit 0.9.0, osmnx 2.1.1, ortools 9.15.6755",
+  "momento_utc": "2026-10-06T14:46:10.887360+00:00",
+  "parametros": {
+    "jornada": "2026-09-27",
+    "semilla_de_instancia": 20260817,
+    "base": "SQLite temporal nueva, descartada al terminar",
+    "deposito": "deposito_san_isidro_2026-08-17.json",
+    "coordenadas": "las del nodo en el grafo vial que carga cartografia por omision: el artefacto mas reciente de datos/grafos",
+    "distancias_por_la_red": "cartografia.matriz_de_costos sobre el Deposito y los nodos de las Ordenes, la misma que optimiza el solver: camino minimo en metros, por fila el origen y por columna el destino",
+    "motor": "el de crear_servicio por omision (SolverVRPDeterminista)",
+    "solicitud": "la de POST /v1/planificaciones sin cuerpo",
+    "instancia": "instancia_san_isidro_2026-10-06.json",
+    "instancia_sha256": "f51a369ada113413d49d3f60eff0da4270e6ab83b446e89bcd1767f413f3a9ce",
+    "sha256": "f183c3267d01617cfd04293402e7dbf688ff3d00c4bd0af138d0421278c4ea1a"
+  }
+}

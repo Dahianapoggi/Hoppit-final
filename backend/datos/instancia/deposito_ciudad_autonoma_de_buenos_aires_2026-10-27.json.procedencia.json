@@ -1,0 +1,30 @@
+{
+  "artefacto": "deposito",
+  "ambito": "Ciudad Autónoma de Buenos Aires",
+  "fuente": "OpenStreetMap via API 0.6 (way/full)",
+  "herramienta": "osmnx 2.1.1",
+  "momento_utc": "2026-10-27T05:43:33.837527+00:00",
+  "parametros": {
+    "criterio": "Predio etiquetado industrial=logistics en OpenStreetMap y operado por una empresa de paqueteria. La referencia del predio es parametro: elegir entre los operadores de paqueteria del partido depende de que rama del negocio opera cada uno, que es dato externo a OSM y decision de proyecto. El codigo no la infiere; verifica que el predio elegido lleve efectivamente la etiqueta y que el nodo resultante este en la componente fuertemente conexa mayor del grafo vial.",
+    "nodo": 3647513546,
+    "lat": -34.5729407,
+    "lon": -58.3939234,
+    "predio_referencia_osm": "way/1347897760",
+    "predio_nombre": null,
+    "predio_clave": "industrial",
+    "predio_valor": "logistics",
+    "predio_area_m2": 27631.89,
+    "predio_lat": -34.573301900000004,
+    "predio_lon": -58.39452674565076,
+    "distancia_nodo_al_predio_m": 68.3,
+    "tags_consultados": {
+      "industrial": [
+        "logistics"
+      ]
+    },
+    "respuesta_osm_archivo": "osm_way_1347897760_full_2026-10-27.json",
+    "respuesta_osm_fecha_utc": "2026-10-27T05:33:36+00:00",
+    "grafo": "grafo_ciudad_autonoma_de_buenos_aires_2026-10-14.graphml",
+    "predio_nombre_omitido": true
+  }
+}

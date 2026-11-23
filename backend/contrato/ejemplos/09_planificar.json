@@ -1,0 +1,69 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/planificaciones",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {}
+  },
+  "respuesta": {
+    "estado": 201,
+    "cuerpo": {
+      "plan": {
+        "id": "plan-4fb83887caaf",
+        "fecha_planificacion": "2026-08-24",
+        "cantidad_rutas": 3,
+        "cantidad_paradas": 19,
+        "demanda_total": 34,
+        "distancia_total_m": 45467.901622340396,
+        "vehiculos": [
+          "AE472LP",
+          "AF815MT",
+          "AG309RB"
+        ]
+      },
+      "fecha_planificacion": "2026-08-24",
+      "distancia_total_m": 45467.901622340396,
+      "demanda_total": 34,
+      "capacidad_total": 39,
+      "rutas": [
+        {
+          "id": "ruta-3382bf7b8778",
+          "plan_id": "plan-4fb83887caaf",
+          "vehiculo_id": "AE472LP",
+          "fecha_planificacion": "2026-08-24",
+          "distancia_m": 16135.871443635127,
+          "carga": 12,
+          "capacidad_vehiculo": 12,
+          "cantidad_paradas": 6,
+          "cantidad_ordenes": 6
+        },
+        {
+          "id": "ruta-6a930ceb70b2",
+          "plan_id": "plan-4fb83887caaf",
+          "vehiculo_id": "AF815MT",
+          "fecha_planificacion": "2026-08-24",
+          "distancia_m": 21060.89975936916,
+          "carga": 11,
+          "capacidad_vehiculo": 12,
+          "cantidad_paradas": 8,
+          "cantidad_ordenes": 9
+        },
+        {
+          "id": "ruta-bda7a727d912",
+          "plan_id": "plan-4fb83887caaf",
+          "vehiculo_id": "AG309RB",
+          "fecha_planificacion": "2026-08-24",
+          "distancia_m": 8271.130419336108,
+          "carga": 11,
+          "capacidad_vehiculo": 12,
+          "cantidad_paradas": 5,
+          "cantidad_ordenes": 6
+        }
+      ],
+      "ordenes_no_planificadas": []
+    }
+  },
+  "nota": "CU-02. Cuerpo vacio: planifica todas las Ordenes planificables con la Flota y el Deposito vigentes. Devuelve una Ruta por Vehiculo, sin geometria; el trazado se pide en el detalle de cada Ruta."
+}

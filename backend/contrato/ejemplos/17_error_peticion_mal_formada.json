@@ -1,0 +1,31 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/ordenes",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "lat": -34.4718,
+      "lon": -58.5074,
+      "demanda": 0
+    }
+  },
+  "respuesta": {
+    "estado": 422,
+    "cuerpo": {
+      "codigo": "peticion_mal_formada",
+      "mensaje": "La peticion no cumple el contrato en: demanda",
+      "detalle": {
+        "campos": [
+          {
+            "campo": "demanda",
+            "motivo": "Input should be greater than or equal to 1",
+            "tipo": "greater_than_equal"
+          }
+        ]
+      }
+    }
+  },
+  "nota": "La demanda es un entero de bultos estrictamente positivo (B-55). Mismo formato que cualquier otro error del contrato: codigo, mensaje y detalle. `detalle.campos` dice que campo se rechazo, con que motivo y de que clase es la violacion, para poder marcarlo en el formulario. Se informan todos los campos invalidos, no solo el primero."
+}

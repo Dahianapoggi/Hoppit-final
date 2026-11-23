@@ -1,0 +1,18 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/ordenes",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 401,
+    "cuerpo": {
+      "codigo": "sesion_vencida",
+      "mensaje": "La sesion vencio: hay que volver a ingresar",
+      "detalle": null
+    }
+  },
+  "nota": "Un token autentico pero vencido. Sin token de renovacion: hay que volver a ingresar."
+}

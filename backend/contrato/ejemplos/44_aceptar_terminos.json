@@ -1,0 +1,36 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/terminos/aceptaciones",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "medio": "web",
+      "aceptaciones": [
+        {
+          "documento": "terminos_de_uso",
+          "version": 2,
+          "sha256": "32bf4487cc987cdd0c4da2a20300c2862098f5e673389fea0df5d96e180af6ad"
+        },
+        {
+          "documento": "consentimiento_transferencia_internacional",
+          "version": 2,
+          "sha256": "213cace99ac5aecfa31716139eed6ca38b2cc0075e827408f166e3db0830a367"
+        }
+      ]
+    }
+  },
+  "respuesta": {
+    "estado": 201,
+    "cuerpo": {
+      "token": "<token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>",
+      "tipo": "Bearer",
+      "vence_en": "2026-08-24T21:00:00Z",
+      "rol": "operador",
+      "nombre_visible": "Usuario de ejemplo",
+      "pendientes": []
+    }
+  },
+  "nota": "Una fila por documento en `aceptaciones`, que es de solo insercion. Responde un token nuevo con los reclamos `terminos` y `consentimientos` actualizados y el mismo vencimiento que el presentado. Que responda un token es una interpretacion del chat central: el diseno pone los terminos en el token y no dice como se actualizan."
+}

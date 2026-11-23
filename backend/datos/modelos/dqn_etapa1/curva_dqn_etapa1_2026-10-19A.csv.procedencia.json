@@ -1,0 +1,11 @@
+{
+  "artefacto": "curva_dqn_etapa1",
+  "ambito": "Ciudad Autonoma de Buenos Aires",
+  "fuente": "entrenamiento en EntornoSecuencial",
+  "herramienta": "tools/entrenar_dqn_etapa1.py",
+  "momento_utc": "2026-10-19T05:48:02.067311+00:00",
+  "parametros": {
+    "sha256": "2772dd11adf55e3b3294d075aa701e54fa64b647bbc756e7a7aba4f06d27f415",
+    "pesos_sha256": "c79efa9f279ec2b5c322b98c4579f652b8d7793360ae8061f0a03ef0bb82e5f8"
+  }
+}

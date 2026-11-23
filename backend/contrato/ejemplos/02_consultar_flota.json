@@ -1,0 +1,44 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/flota",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "vehiculos": [
+        {
+          "id": "AE472LP",
+          "capacidad": 13,
+          "capacidad_efectiva": 12,
+          "disponible": true,
+          "comprometido_en": null
+        },
+        {
+          "id": "AF815MT",
+          "capacidad": 13,
+          "capacidad_efectiva": 12,
+          "disponible": true,
+          "comprometido_en": null
+        },
+        {
+          "id": "AG309RB",
+          "capacidad": 13,
+          "capacidad_efectiva": 12,
+          "disponible": true,
+          "comprometido_en": null
+        }
+      ],
+      "capacidad_total": 39,
+      "fecha": "2026-08-24",
+      "capacidad_disponible": 39,
+      "margen_de_capacidad": 0.05,
+      "capacidad_efectiva_total": 36,
+      "capacidad_efectiva_disponible": 36
+    }
+  },
+  "nota": "FR-15. Los Vehiculos con su capacidad y su disponibilidad para una jornada, legibles antes de que exista plan alguno: componer una planificacion exige conocerlos. `disponible` y `comprometido_en` publican la regla de que un Vehiculo participa de un unico Plan por jornada (glosario, entidad 13), para que no haya que reconstruirla del otro lado recorriendo las Rutas del dia. `fecha` declara la jornada evaluada; omitida en la peticion, es la operativa en curso. `capacidad_total` y `capacidad_disponible` son sumas derivadas. La Flota es una coleccion y no una entidad con identidad propia (glosario, entidad 5); esto la publica, no admite altas."
+}

@@ -1,0 +1,19 @@
+{
+  "artefacto": "grafo",
+  "ambito": "Ciudad Autónoma de Buenos Aires",
+  "fuente": "OpenStreetMap via Overpass API",
+  "herramienta": "osmnx 2.0.7",
+  "momento_utc": "2026-10-14T12:23:47.520867+00:00",
+  "parametros": {
+    "consulta": "R1224652",
+    "tipo_red": "drive",
+    "simplificado": true,
+    "area_nombre_completo": "Buenos Aires, Comuna 1, Autonomous City of Buenos Aires, Argentina",
+    "area_tipo_osm": "relation",
+    "area_id_osm": 1224652,
+    "area_km2": 205.61,
+    "sha256": "03c7b8ff183132324067a63a91c297b259d41be74ba5a7a6b21ffd4d5d049f79",
+    "overpass_fecha": "2026-10-13T00:00:00Z",
+    "overpass_settings": "[out:json][timeout:{timeout}]{maxsize}[date:\"2026-10-13T00:00:00Z\"]"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "artefacto": "grafo",
+  "ambito": "Lanús",
+  "fuente": "OpenStreetMap via Overpass API",
+  "herramienta": "osmnx 2.0.7",
+  "momento_utc": "2026-10-12T21:58:08.452703+00:00",
+  "parametros": {
+    "consulta": "Partido de Lanús, Provincia de Buenos Aires, Argentina",
+    "tipo_red": "drive",
+    "simplificado": true,
+    "area_nombre_completo": "Partido de Lanús, Buenos Aires, Argentina",
+    "area_tipo_osm": "relation",
+    "area_id_osm": 1421519,
+    "area_km2": 50.18,
+    "sha256": "9ff45b66e4126cc64f0a218146a874b7d56aac91d235504450e9c4e593ebb290"
+  }
+}

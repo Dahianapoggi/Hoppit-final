@@ -1,0 +1,18 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/jornadas",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "fechas": [
+        "2026-08-24"
+      ]
+    }
+  },
+  "nota": "RB-11. Las fechas que tienen al menos un Plan, en orden. Es lo que permite ofrecer navegacion entre jornadas sin adivinar: sin esto, la unica forma de saber si un dia tiene contenido era pedir sus Rutas y ver si volvia vacio. Se enumeran jornadas con Plan y no con Ruta, porque el Plan es lo que registra que hubo corrida."
+}

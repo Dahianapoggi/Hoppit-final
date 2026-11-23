@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOPPIT · Registrar Orden</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icono-180.png">
+
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+
+<!-- IBM Plex vendorizado, no por red (FE-05). Mismo criterio que Leaflet. -->
+<link rel="stylesheet" href="vendor/fuentes/fuentes.css">
+
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="pantalla-orden">
+
+<div class="topbar">
+  <span class="wordmark">HOPPIT</span>
+  <span class="vr"></span>
+  <h1 class="screen-title">Registrar Orden</h1>
+  <span class="crumb" id="ambito-del-grafo"></span>
+  <span class="spacer"></span>
+  <span class="pulso" id="registradas-hoy" hidden></span>
+  <a class="btn-txt" id="cancelar" href="inicio.html">Cancelar</a>
+</div>
+
+<div class="body">
+  <div class="form" id="form">
+
+    <div class="form-body">
+
+      <!-- 1 · Destino. Busqueda por direccion con Georef (RB-10; 2026-10-27C,
+           G; DFE-41): elegir un candidato marca el punto como un clic en el
+           mapa. Se busca al pulsar, no a cada tecla, para no gastar la cuota
+           del servicio. -->
+      <section class="grupo-form">
+        <div class="gt"><span class="n">1</span>Destino</div>
+        <form class="busqueda-direccion" id="form-direccion" role="search">
+          <label class="inp con-icono"><span class="sr">Buscar por dirección</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+            <input type="search" id="direccion" maxlength="200" placeholder="Calle y altura" autocomplete="off"></label>
+          <button class="btn-ghost" type="submit" id="buscar-direccion">Buscar</button>
+        </form>
+        <div id="candidatos" aria-live="polite"></div>
+        <div class="help atribucion-georef">O hacé clic en el mapa. Servicio Georef – argentina.gob.ar/georef</div>
+        <div id="destino" class="destino" aria-live="polite"></div>
+        <!-- Sin mouse: las flechas mueven el mapa y esto marca su centro. -->
+        <button class="link" type="button" id="marcar-centro">Marcar el centro del mapa como destino</button>
+      </section>
+
+      <!-- 2 · Carga. -->
+      <section class="grupo-form">
+        <div class="gt"><span class="n">2</span>Carga</div>
+        <div class="fld">
+          <div class="flab"><label class="t" for="demanda">Demanda</label><span class="req">obligatorio</span></div>
+          <div class="stepper" id="caja-demanda">
+            <button type="button" id="demanda-menos" aria-label="Un bulto menos">−</button>
+            <div class="v"><input type="number" id="demanda" min="1" step="1" placeholder="0" inputmode="numeric"><small>bultos</small></div>
+            <button type="button" id="demanda-mas" aria-label="Un bulto más">+</button>
+          </div>
+          <div id="err-demanda"></div>
+          <div class="help">Un número entero de bultos, mayor que 0. Es lo que ocupa en el Vehículo.</div>
+        </div>
+      </section>
+
+      <!-- 3 · Compromiso. Prioridad y plazo se registran desde el backend
+           0.11.0 (B-220, punto 2): con ellos se calcula la criticidad que
+           decide qué Órdenes quedan afuera de un Plan parcial. -->
+      <section class="grupo-form">
+        <div class="gt"><span class="n">3</span>Compromiso</div>
+        <fieldset class="fld">
+          <legend class="flab"><span class="t">Prioridad</span><span class="req">media si no se elige</span></legend>
+          <div class="seg seg-elegible seg-ancho" id="prioridad">
+            <label><input type="radio" name="prioridad" value="1"><span>Baja</span></label>
+            <label><input type="radio" name="prioridad" value="2" checked><span>Media</span></label>
+            <label><input type="radio" name="prioridad" value="3"><span>Alta</span></label>
+          </div>
+          <div class="help">Si la Flota no alcanza, el plan deja afuera primero las Órdenes de menor prioridad.</div>
+        </fieldset>
+
+        <div class="fld">
+          <div class="flab"><label class="t" for="plazo">Plazo comprometido</label><span class="req">opcional</span></div>
+          <div class="inp con-icono" id="caja-plazo">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
+            <input type="date" id="plazo">
+          </div>
+          <div id="err-plazo"></div>
+          <div class="help">Una Orden atrasada respecto de su plazo gana prioridad al planificar.</div>
+        </div>
+
+        <div class="fld">
+          <div class="flab"><span class="t">Ventana horaria</span><span class="req">opcional</span></div>
+          <div class="inp" id="caja-ventana">
+            <label class="t" for="ventana-desde">Desde</label> <input type="time" id="ventana-desde">
+            <label class="t" for="ventana-hasta">Hasta</label> <input type="time" id="ventana-hasta">
+          </div>
+          <div id="err-ventana"></div>
+          <div class="help">Se registra con la Orden. El plan todavía no la tiene en cuenta.</div>
+        </div>
+      </section>
+
+      <!-- Los atributos que el sistema todavía no registra se muestran
+           rotulados, no ausentes: el caso de uso y la pantalla dicen lo mismo
+           (PUX-22). El rótulo es neutro y no una marca de fase, porque son
+           atributos del glosario con registro diferido (PUX-39). -->
+      <section class="grupo-form">
+        <div class="proximamente">
+          <div class="fila"><span>Modalidad · Entrega / Recolección</span><span class="tag">No se registra aún</span></div>
+          <div class="fila"><span>Ventana horaria admisible</span><span class="tag">No se registra aún</span></div>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="form-foot">
+      <button class="btn" id="btn-registrar" disabled>Registrar Orden</button>
+      <span class="n" id="pie-form">Marcá el destino y completá la demanda.</span>
+    </div>
+  </div>
+
+  <div class="map">
+    <div id="mapa"></div>
+    <div class="chip pista" id="pista">
+      <div class="t" id="pista-ambito">Destino</div>
+      <div class="s">Hacé clic en el mapa para marcar o mover el punto de entrega.</div>
+    </div>
+  </div>
+</div>
+
+<div class="aviso" id="aviso" hidden>
+  <div class="caja">
+    <div class="t" id="aviso-tipo"></div>
+    <h3 id="aviso-titulo"></h3>
+    <p id="aviso-texto"></p>
+  </div>
+</div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script type="module" src="js/orden.js"></script>
+</body>
+</html>

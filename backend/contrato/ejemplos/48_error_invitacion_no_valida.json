@@ -1,0 +1,21 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/registros",
+    "cuerpo": {
+      "codigo": "<codigo de invitacion: de un solo uso, omitido en los ejemplos>",
+      "usuario": "otra-cuenta-de-ejemplo",
+      "nombre_visible": "Cuenta registrada de ejemplo",
+      "contrasena": "<contrasena: omitida en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 422,
+    "cuerpo": {
+      "codigo": "invitacion_no_valida",
+      "mensaje": "El codigo de invitacion no es valido: no existe, vencio o ya se uso. Hay que pedir uno nuevo a un operador.",
+      "detalle": null
+    }
+  },
+  "nota": "El mismo codigo del ejemplo 47, ya usado. Un codigo inexistente o vencido recibe exactamente la misma respuesta. Cada fallo cuenta para el limite de 10 por direccion de origen en 15 min (429 `demasiados_intentos`)."
+}

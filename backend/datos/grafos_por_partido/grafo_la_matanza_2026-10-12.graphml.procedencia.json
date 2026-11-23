@@ -1,0 +1,17 @@
+{
+  "artefacto": "grafo",
+  "ambito": "La Matanza",
+  "fuente": "OpenStreetMap via Overpass API",
+  "herramienta": "osmnx 2.0.7",
+  "momento_utc": "2026-10-12T22:01:14.783687+00:00",
+  "parametros": {
+    "consulta": "Partido de La Matanza, Provincia de Buenos Aires, Argentina",
+    "tipo_red": "drive",
+    "simplificado": true,
+    "area_nombre_completo": "Partido de La Matanza, Buenos Aires, Argentina",
+    "area_tipo_osm": "relation",
+    "area_id_osm": 1749088,
+    "area_km2": 327.12,
+    "sha256": "4f77caff0917db0b9673f8c82833f82022f9ceee5e082a0d5cd4fa3bc07bed1e"
+  }
+}

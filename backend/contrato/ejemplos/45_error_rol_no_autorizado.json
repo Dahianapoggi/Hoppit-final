@@ -1,0 +1,23 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/ordenes",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 403,
+    "cuerpo": {
+      "codigo": "rol_no_autorizado",
+      "mensaje": "El rol transportista no puede usar esta operacion: es del rol operador",
+      "detalle": {
+        "rol": "transportista",
+        "roles_admitidos": [
+          "operador"
+        ]
+      }
+    }
+  },
+  "nota": "Un transportista con los terminos aceptados: ninguna de las operaciones actuales es de su rol. Su vinculo con la Ruta llega con el transportista en el despacho (D-C2)."
+}

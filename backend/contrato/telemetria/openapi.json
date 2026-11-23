@@ -1,0 +1,764 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "HOPPIT · telemetria y seguimiento",
+    "description": "Servicio de telemetria y seguimiento de HOPPIT (ARQ-52, ARQ-53, ARQ-59). Recibe las posiciones de las Rutas en ejecucion, publica la ultima con su antiguedad y recibe los eventos del nucleo por la salida transaccional, en una ruta que el borde no expone.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/estado": {
+      "get": {
+        "tags": [
+          "Servicio"
+        ],
+        "summary": "Version y salud",
+        "operationId": "estado_estado_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstadoDeTelemetria"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/telemetria/lotes": {
+      "post": {
+        "tags": [
+          "Telemetria"
+        ],
+        "summary": "Recibir un lote de posiciones del dispositivo (seccion 3.2)",
+        "description": "Token de transportista, terminos vigentes y consentimiento de\ngeolocalizacion. Cada posicion se acepta, se descarta por repetida o\nse rechaza con su motivo, y se acepta por instante de captura, no de\nllegada. Los motivos de rechazo son `identificador_invalido` (el `id`\nno es un UUID version 4 en forma canonica), `ejecucion_desconocida`\n(el unico reintentable), `ruta_no_asignada`, `fuera_de_ejecucion`,\n`marca_temporal_invalida` y `coordenadas_invalidas`.",
+        "operationId": "recibir_lote_v1_telemetria_lotes_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoteSolicitado"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoteClasificado"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "`no_autenticado` o `sesion_vencida`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "`rol_no_autorizado` o `terminos_no_aceptados`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "`lote_demasiado_grande`: mas de 100 posiciones o mas de 65536 bytes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "`peticion_mal_formada` si el cuerpo no cumple el esquema, o `dispositivo_invalido` si el `dispositivo_id` no es un UUID version 4 en forma canonica.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "`base_no_disponible`: la aplicacion reintenta.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/telemetria/rutas/{ruta_id}/ultima-posicion": {
+      "get": {
+        "tags": [
+          "Telemetria"
+        ],
+        "summary": "Ultima posicion de una Ruta y su antiguedad (FR-17)",
+        "description": "Para la interfaz del operador, que la superpone sobre la Ruta que\nobtiene del nucleo.",
+        "operationId": "ultima_posicion_v1_telemetria_rutas__ruta_id__ultima_posicion_get",
+        "parameters": [
+          {
+            "name": "ruta_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Ruta Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UltimaPosicionPublicada"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "`no_autenticado` o `sesion_vencida`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "`rol_no_autorizado` o `terminos_no_aceptados`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "`sin_posiciones`: la Ruta no tiene ninguna posicion informada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interno/rutas/{ruta_id}/ultima-posicion": {
+      "get": {
+        "tags": [
+          "Interno"
+        ],
+        "summary": "Ultima posicion de una Ruta para el nucleo (CU-07, paso 3; CU-09)",
+        "description": "La misma respuesta que la del operador, con token de servicio del\nnucleo: es como el nucleo lee la posicion para replanificar (17B, C.1,\ncamino a). Una Ruta reemplazada responde con la de la vigente.",
+        "operationId": "ultima_posicion_interna_interno_rutas__ruta_id__ultima_posicion_get",
+        "parameters": [
+          {
+            "name": "ruta_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Ruta Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UltimaPosicionPublicada"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "`no_autenticado`: falta el token de servicio o no es valido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "`sin_posiciones`: la Ruta no tiene ninguna posicion informada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interno/rutas/{ruta_id}/posiciones-recientes": {
+      "get": {
+        "tags": [
+          "Interno"
+        ],
+        "summary": "Posiciones recientes de la Ruta vigente para el nucleo (reruteo por desvio)",
+        "description": "Las capturadas en los ultimos `segundos`, en orden de captura (a lo\nsumo 20); una Ruta reemplazada responde con las de la vigente. Lista\nvacia si no hay.",
+        "operationId": "posiciones_recientes_internas_interno_rutas__ruta_id__posiciones_recientes_get",
+        "parameters": [
+          {
+            "name": "ruta_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Ruta Id"
+            }
+          },
+          {
+            "name": "segundos",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "maximum": 3600,
+              "exclusiveMinimum": 0,
+              "default": 120.0,
+              "title": "Segundos"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PosicionRecientePublicada"
+                  },
+                  "title": "Response Posiciones Recientes Internas Interno Rutas  Ruta Id  Posiciones Recientes Get"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "`no_autenticado`: falta el token de servicio o no es valido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "`peticion_mal_formada` si `segundos` no es positivo.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interno/eventos": {
+      "post": {
+        "tags": [
+          "Interno"
+        ],
+        "summary": "Eventos del nucleo por la salida transaccional (ARQ-59)",
+        "description": "Con token de servicio del nucleo. Un evento repetido se descarta.",
+        "operationId": "recibir_evento_interno_eventos_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventoSolicitado"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventoRegistrado"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "`no_autenticado`: falta el token de servicio o no es valido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "`secuencia_fuera_de_orden`: el nucleo reintenta en orden.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "`evento_desconocido` o `peticion_mal_formada`.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorPublicado"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorPublicado": {
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "title": "Codigo"
+          },
+          "mensaje": {
+            "type": "string",
+            "title": "Mensaje"
+          },
+          "detalle": {
+            "title": "Detalle"
+          }
+        },
+        "type": "object",
+        "required": [
+          "codigo",
+          "mensaje"
+        ],
+        "title": "ErrorPublicado"
+      },
+      "EstadoDeTelemetria": {
+        "properties": {
+          "producto": {
+            "type": "string",
+            "title": "Producto"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "base": {
+            "type": "string",
+            "title": "Base"
+          }
+        },
+        "type": "object",
+        "required": [
+          "producto",
+          "version",
+          "base"
+        ],
+        "title": "EstadoDeTelemetria"
+      },
+      "EventoRegistrado": {
+        "properties": {
+          "nuevo": {
+            "type": "boolean",
+            "title": "Nuevo"
+          }
+        },
+        "type": "object",
+        "required": [
+          "nuevo"
+        ],
+        "title": "EventoRegistrado"
+      },
+      "EventoSolicitado": {
+        "properties": {
+          "evento_id": {
+            "type": "string",
+            "title": "Evento Id"
+          },
+          "tipo": {
+            "type": "string",
+            "title": "Tipo"
+          },
+          "agregado_id": {
+            "type": "string",
+            "title": "Agregado Id"
+          },
+          "secuencia_del_agregado": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Secuencia Del Agregado"
+          },
+          "cuerpo": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Cuerpo"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "evento_id",
+          "tipo",
+          "agregado_id",
+          "secuencia_del_agregado",
+          "cuerpo"
+        ],
+        "title": "EventoSolicitado"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LoteClasificado": {
+        "properties": {
+          "aceptadas": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Aceptadas"
+          },
+          "duplicadas": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Duplicadas"
+          },
+          "rechazadas": {
+            "items": {
+              "$ref": "#/components/schemas/RechazoPublicado"
+            },
+            "type": "array",
+            "title": "Rechazadas"
+          }
+        },
+        "type": "object",
+        "required": [
+          "aceptadas",
+          "duplicadas",
+          "rechazadas"
+        ],
+        "title": "LoteClasificado"
+      },
+      "PosicionRecientePublicada": {
+        "properties": {
+          "latitud": {
+            "type": "number",
+            "title": "Latitud"
+          },
+          "longitud": {
+            "type": "number",
+            "title": "Longitud"
+          },
+          "capturada_en": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Capturada En"
+          }
+        },
+        "type": "object",
+        "required": [
+          "latitud",
+          "longitud",
+          "capturada_en"
+        ],
+        "title": "PosicionRecientePublicada",
+        "description": "Una posicion reciente de la Ruta vigente, tal como la informo el\ndispositivo (D18 del encargo 2026-11-22A)."
+      },
+      "RechazoPublicado": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "motivo": {
+            "type": "string",
+            "title": "Motivo"
+          },
+          "reintentable": {
+            "type": "boolean",
+            "title": "Reintentable"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "motivo",
+          "reintentable"
+        ],
+        "title": "RechazoPublicado"
+      },
+      "UltimaPosicionPublicada": {
+        "properties": {
+          "ruta_id": {
+            "type": "string",
+            "title": "Ruta Id"
+          },
+          "latitud": {
+            "type": "number",
+            "title": "Latitud"
+          },
+          "longitud": {
+            "type": "number",
+            "title": "Longitud"
+          },
+          "precision_m": {
+            "type": "number",
+            "title": "Precision M"
+          },
+          "capturada_en": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Capturada En"
+          },
+          "recibida_en": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Recibida En"
+          },
+          "antiguedad_s": {
+            "type": "number",
+            "title": "Antiguedad S"
+          },
+          "antiguedad_sobre_la_recepcion": {
+            "type": "boolean",
+            "title": "Antiguedad Sobre La Recepcion"
+          },
+          "estado_de_ejecucion": {
+            "type": "string",
+            "title": "Estado De Ejecucion"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ruta_id",
+          "latitud",
+          "longitud",
+          "precision_m",
+          "capturada_en",
+          "recibida_en",
+          "antiguedad_s",
+          "antiguedad_sobre_la_recepcion",
+          "estado_de_ejecucion"
+        ],
+        "title": "UltimaPosicionPublicada",
+        "description": "La ultima posicion de una Ruta (FR-17; ARQ-53). Es la que informo el\ndispositivo, sin ajustarla al grafo."
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "LoteSolicitado": {
+        "additionalProperties": false,
+        "properties": {
+          "ruta_id": {
+            "minLength": 1,
+            "title": "Ruta Id",
+            "type": "string"
+          },
+          "dispositivo_id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Dispositivo Id",
+            "type": "string"
+          },
+          "posiciones": {
+            "items": {
+              "$ref": "#/components/schemas/PosicionSolicitada"
+            },
+            "title": "Posiciones",
+            "type": "array"
+          },
+          "descartadas_por_cola_llena": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Descartadas Por Cola Llena",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "ruta_id",
+          "dispositivo_id",
+          "posiciones"
+        ],
+        "title": "LoteSolicitado",
+        "type": "object"
+      },
+      "PosicionSolicitada": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "capturada_en": {
+            "format": "date-time",
+            "title": "Capturada En",
+            "type": "string"
+          },
+          "latitud": {
+            "title": "Latitud",
+            "type": "number"
+          },
+          "longitud": {
+            "title": "Longitud",
+            "type": "number"
+          },
+          "precision_m": {
+            "minimum": 0,
+            "title": "Precision M",
+            "type": "number"
+          },
+          "velocidad_mps": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Velocidad Mps"
+          },
+          "rumbo_grados": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Rumbo Grados"
+          }
+        },
+        "required": [
+          "id",
+          "capturada_en",
+          "latitud",
+          "longitud",
+          "precision_m"
+        ],
+        "title": "PosicionSolicitada",
+        "type": "object"
+      }
+    }
+  }
+}

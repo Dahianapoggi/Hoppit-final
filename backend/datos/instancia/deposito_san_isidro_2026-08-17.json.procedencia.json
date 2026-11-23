@@ -1,0 +1,26 @@
+{
+  "artefacto": "deposito",
+  "ambito": "San Isidro",
+  "fuente": "OpenStreetMap via Overpass API",
+  "herramienta": "osmnx 2.0.7",
+  "momento_utc": "2026-08-17T18:24:25.118765+00:00",
+  "parametros": {
+    "criterio": "Predio etiquetado industrial=logistics en OpenStreetMap y operado por una empresa de paqueteria. La referencia del predio es parametro: elegir entre los operadores de paqueteria del partido depende de que rama del negocio opera cada uno, que es dato externo a OSM y decision de proyecto. El codigo no la infiere; verifica que el predio elegido lleve efectivamente la etiqueta y que el nodo resultante este en la componente fuertemente conexa mayor del grafo vial.",
+    "nodo": 13282860598,
+    "lat": -34.5024581,
+    "lon": -58.537415,
+    "predio_referencia_osm": "way/1525656127",
+    "predio_nombre": "DPD",
+    "predio_clave": "industrial",
+    "predio_valor": "logistics",
+    "predio_area_m2": 9504.82,
+    "predio_lat": -34.50241265,
+    "predio_lon": -58.53830894870232,
+    "distancia_nodo_al_predio_m": 82.07,
+    "tags_consultados": {
+      "industrial": [
+        "logistics"
+      ]
+    }
+  }
+}

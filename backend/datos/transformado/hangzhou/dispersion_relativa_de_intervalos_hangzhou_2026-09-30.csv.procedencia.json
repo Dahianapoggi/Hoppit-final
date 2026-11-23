@@ -1,0 +1,48 @@
+{
+  "artefacto": "dispersion_relativa_de_intervalos",
+  "ambito": "Hangzhou",
+  "fuente": "LaDe-D, delivery_hz.csv",
+  "herramienta": "pandas 3.0.6, numpy 2.5.3, pyproj 3.8.0",
+  "momento_utc": "2026-09-30T21:55:52.786033+00:00",
+  "parametros": {
+    "entrada": {
+      "archivo": "delivery_hz.csv",
+      "repositorio": "Cainiao-AI/LaDe",
+      "revision": "be2cec02775cafc8d52230303f32134382bcc50b",
+      "sha256": "9969df2a5c79dadc6149c384e3632eccc0417d01a2575a74db2310e786541c22",
+      "licencia": "CC BY-NC 4.0"
+    },
+    "ciudad_elegida_por": "B-162, punto 2: tools/transformar_lade.py seleccion",
+    "magnitud": "intervalo entre finalizaciones consecutivas de un mismo transportista en un mismo ds, en minutos (DAT-16); resolucion limitada por el piso de 5 minutos (DAT-09)",
+    "alcance": "tareas cerradas en su ds o el siguiente (B-162, punto 4)",
+    "tareas_en_alcance": 1856372,
+    "tareas_excluidas": 5228,
+    "intervalos": 1784717,
+    "distancia": "geodesica WGS-84 entre coordenadas de parada consecutivas",
+    "bordes_de_distancia_m": [
+      "0.0",
+      "100.0",
+      "250.0",
+      "500.0",
+      "1000.0",
+      "2000.0",
+      "inf"
+    ],
+    "franja": "hora de la finalizacion previa",
+    "cuantiles": [
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      0.9
+    ],
+    "n_minimo_por_celda": 200,
+    "bootstrap": {
+      "estadistico": "p90/p50",
+      "remuestras": 2000,
+      "nivel_de_confianza": 0.95,
+      "semilla": 20260930,
+      "metodo": "percentil; remuestreo como multinomial sobre las frecuencias"
+    }
+  }
+}

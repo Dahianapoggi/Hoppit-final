@@ -1,0 +1,25 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/incidentes",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "tipo": "condicion_climatica_adversa",
+      "alcance": "total"
+    }
+  },
+  "respuesta": {
+    "estado": 201,
+    "cuerpo": {
+      "id": "incidente-de-ejemplo-02",
+      "tipo": "condicion_climatica_adversa",
+      "alcance": "total",
+      "descripcion": "",
+      "rutas_afectadas": [],
+      "declarado_en": "2026-08-24T15:01:00Z"
+    }
+  },
+  "nota": "Cero Rutas afectadas es valido (glosario, relacion 6)."
+}

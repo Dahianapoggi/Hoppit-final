@@ -1,0 +1,45 @@
+{
+  "peticion": {
+    "metodo": "DELETE",
+    "ruta": "/v1/rutas/ruta-1d8aad4ec546",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 409,
+    "cuerpo": {
+      "codigo": "ruta_en_ejecucion",
+      "mensaje": "La Ruta ruta-1d8aad4ec546 ya fue despachada: no se puede descartar ni invalidar. Estados: orden-00 en Completada, orden-02 en En tránsito, orden-03 en En tránsito, orden-06 en En tránsito, orden-07 en En tránsito, orden-14 en En tránsito.",
+      "detalle": {
+        "ordenes": [
+          {
+            "orden": "orden-00",
+            "estado": "completada"
+          },
+          {
+            "orden": "orden-02",
+            "estado": "en_transito"
+          },
+          {
+            "orden": "orden-03",
+            "estado": "en_transito"
+          },
+          {
+            "orden": "orden-06",
+            "estado": "en_transito"
+          },
+          {
+            "orden": "orden-07",
+            "estado": "en_transito"
+          },
+          {
+            "orden": "orden-14",
+            "estado": "en_transito"
+          }
+        ]
+      }
+    }
+  },
+  "nota": "Una Ruta despachada no se invalida ni se descarta: el ciclo de vida solo admite volver a Creada desde Planificada. Lo mismo vale para descartar su Plan y para desasignar una de sus Ordenes."
+}

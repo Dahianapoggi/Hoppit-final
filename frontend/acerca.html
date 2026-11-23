@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOPPIT · Acerca de</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icono-180.png">
+
+<link rel="stylesheet" href="vendor/fuentes/fuentes.css">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="pantalla-acerca">
+
+<div class="topbar">
+  <span class="wordmark">HOPPIT</span>
+  <span class="vr"></span>
+  <span class="screen-title">Acerca de</span>
+  <span class="spacer"></span>
+  <a class="btn-ghost" id="ingresar" href="ingreso.html" hidden>Ingresar</a>
+</div>
+
+<!-- Acerca de (DFE-13; rediseño 2026-11 con la propuesta aprobada). Sin
+     cifras nuevas: la procedencia de los datos con los rótulos que el
+     producto ya usa, y sus licencias (DAT-47). -->
+<main class="pagina">
+  <div class="cuerpo-ancho">
+    <section class="tarjeta acerca-hero">
+      <img src="img/hoppit-isotipo.png" alt="" width="92" height="100">
+      <div><h1 class="n">HOPPIT</h1><p>Plataforma de gestión de flotas y logística de última milla · PFI de UADE</p></div>
+      <div class="ver" id="version"><span class="num">…</span><small>consultando la versión</small></div>
+    </section>
+
+    <div class="proc-grid">
+      <section class="tarjeta proc"><h2><span class="ico" data-icono="reloj"></span>Hora estimada de la primera entrega</h2>
+        <p>Es una estimación por simulación, no una predicción validada. Suma un viaje por la red vial a una
+          velocidad de trabajo supuesta, que no está medida en el AMBA, y tiempos de parada tomados de datos de
+          reparto de otra ciudad (LaDe, Hangzhou). No depende del tránsito y su banda no está medida en el AMBA.</p></section>
+      <section class="tarjeta proc"><h2><span class="ico" data-icono="plan"></span>Mapa y red vial</h2>
+        <p>El fondo del mapa son teselas de OpenStreetMap, y la red vial con que se calculan las Rutas es un grafo
+          derivado de OpenStreetMap. © colaboradores de OpenStreetMap
+          (<a class="link-ambar" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">openstreetmap.org/copyright</a>).</p>
+        <span class="lic">ODbL 1.0</span></section>
+      <section class="tarjeta proc"><h2><span class="ico" data-icono="planificar"></span>Planificación de las Rutas</h2>
+        <p>Las calcula un motor de optimización (OR-Tools) que minimiza la distancia total recorrida. El cálculo
+          es determinista: la misma selección produce el mismo plan.</p></section>
+      <section class="tarjeta proc"><h2><span class="ico" data-icono="caja"></span>Instancia de demostración</h2>
+        <p>Las Órdenes y la Flota de la demostración son datos de prueba, no de un operador real.</p></section>
+    </div>
+    <section class="tarjeta proc proc-ancho"><h2><span class="ico" data-icono="escudo"></span>Licencias de los datos de origen</h2>
+      <p>Los componentes estadísticos del prototipo derivan de conjuntos de datos con licencia de uso no
+        comercial: la componente de parada del ETA, de LaDe (Cainiao), y el simulador y los modelos entrenados
+        con él, además, de Amazon Last Mile Routing Research Challenge 2021. Un uso comercial requiere
+        reemplazarlos por datos del propio operador.</p>
+      <span class="lic">LaDe · CC BY-NC 4.0</span><span class="lic">Amazon 2021 · CC BY-NC 4.0</span></section>
+  </div>
+</main>
+
+<script type="module" src="js/acerca.js"></script>
+</body>
+</html>

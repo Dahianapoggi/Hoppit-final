@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOPPIT · Incidentes</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icono-180.png">
+
+<link rel="stylesheet" href="vendor/fuentes/fuentes.css">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="pantalla-incidentes">
+
+<div class="topbar">
+  <span class="wordmark">HOPPIT</span>
+  <span class="vr"></span>
+  <span class="screen-title">Incidentes</span>
+  <div class="datectl">
+    <label class="cap" for="fecha">Jornada</label>
+    <input class="val fecha-input" type="date" id="fecha">
+  </div>
+  <span class="spacer"></span>
+  <a class="btn-ghost btn-con-icono" href="alertas.html"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 1 1 12 0v5l2 2H4zM10 21h4"/></svg>Ver alertas</a>
+</div>
+
+<!-- Incidentes (DFE-17; rediseño 2026-11 con la propuesta aprobada). Usa
+     solo las tres operaciones existentes: declarar, listar y consultar
+     (FR-18; CU-07, paso 1). Registrar un Incidente no recalcula nada; sus
+     alertas se ven en alertas.html (2026-10-27B, A). -->
+<main class="pagina">
+  <div class="cuerpo-ancho">
+    <div class="banda-info">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/></svg>
+      <p>Registrar un Incidente deja constancia y dice qué Rutas afecta; <b>no cambia ninguna Ruta ni
+        ninguna Orden</b>, porque el recálculo no está construido. Si afecta una Ruta con entregas
+        pendientes, genera una alerta.</p>
+    </div>
+
+    <div class="inc-grid">
+      <div class="columna">
+        <section class="tarjeta">
+          <div class="sec-h"><h2>Declarados en la jornada</h2><span class="eyebrow" id="cuenta"></span></div>
+          <div id="lista"><p class="cargando">Cargando los Incidentes…</p></div>
+        </section>
+        <section class="tarjeta detalle-incidente" id="detalle" hidden aria-live="polite"></section>
+      </div>
+
+      <section class="tarjeta form-card" id="declarar" aria-labelledby="titulo-declarar">
+        <div class="eyebrow">Nuevo</div>
+        <h2 id="titulo-declarar">Declarar un Incidente</h2>
+        <form class="formulario" id="formulario" novalidate>
+          <div class="campo">
+            <label for="tipo">Tipo</label>
+            <select id="tipo" required></select>
+            <div class="help">Corte de calle, siniestro, desvío, cancelación o condición climática adversa.</div>
+            <div class="error-campo" id="error-tipo" role="alert"></div>
+          </div>
+          <fieldset>
+            <legend>Alcance</legend>
+            <label class="radio-card"><input type="radio" name="alcance" value="parcial" checked>
+              <span class="radio" aria-hidden="true"></span><span><b>Parcial</b><span>Afecta parte del plan</span></span></label>
+            <label class="radio-card"><input type="radio" name="alcance" value="total">
+              <span class="radio" aria-hidden="true"></span><span><b>Total</b><span>Afecta todo el plan</span></span></label>
+            <div class="error-campo" id="error-alcance" role="alert"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Rutas afectadas <span class="opc">opcional</span></legend>
+            <div id="rutas"><p class="cargando">Cargando las Rutas de la jornada…</p></div>
+            <div class="error-campo" id="error-rutas" role="alert"></div>
+          </fieldset>
+          <fieldset id="zona">
+            <legend>Zona afectada <span class="opc">opcional</span></legend>
+            <div class="help">Si la marcás, la propuesta de recálculo de este Incidente no usa los tramos que pasan a menos del radio del punto.</div>
+            <div class="campo">
+              <label for="zona-radio">Radio (m)</label>
+              <div class="inp"><input id="zona-radio" type="number" min="20" max="1000" step="10" inputmode="numeric" placeholder="entre 20 y 1.000"><span class="unit">m</span></div>
+            </div>
+            <div class="campo">
+              <label for="zona-lat">Latitud</label>
+              <div class="inp"><input id="zona-lat" type="number" step="any" inputmode="decimal"></div>
+            </div>
+            <div class="campo">
+              <label for="zona-lon">Longitud</label>
+              <div class="inp"><input id="zona-lon" type="number" step="any" inputmode="decimal"></div>
+            </div>
+            <p class="ayuda-breve" id="zona-ayuda">El punto es el del corte (la calle o la esquina cortada), no la posición del Vehículo: una zona que contiene al Vehículo no deja calcular la alternativa.</p>
+            <div class="error-campo" id="error-zona" role="alert"></div>
+          </fieldset>
+          <div class="campo">
+            <label for="descripcion">Descripción <span class="opc">opcional</span></label>
+            <textarea id="descripcion" maxlength="500" placeholder="Qué pasó y dónde…"></textarea>
+          </div>
+          <div id="error-general" role="alert"></div>
+          <button class="btn-ancho" type="submit" id="enviar">Declarar el Incidente</button>
+          <p class="s-nota">Queda registrado con la hora de la declaración y <b>no se puede borrar ni corregir</b>.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="js/incidentes.js"></script>
+</body>
+</html>

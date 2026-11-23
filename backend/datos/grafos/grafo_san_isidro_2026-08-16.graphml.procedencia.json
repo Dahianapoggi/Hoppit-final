@@ -1,0 +1,16 @@
+{
+  "artefacto": "grafo",
+  "ambito": "San Isidro",
+  "fuente": "OpenStreetMap via Overpass API",
+  "herramienta": "osmnx 2.0.7",
+  "momento_utc": "2026-08-16T01:58:44.245165+00:00",
+  "parametros": {
+    "consulta": "Partido de San Isidro, Provincia de Buenos Aires, Argentina",
+    "tipo_red": "drive",
+    "simplificado": true,
+    "area_nombre_completo": "Partido de San Isidro, Buenos Aires, Argentina",
+    "area_tipo_osm": "relation",
+    "area_id_osm": 1769044,
+    "area_km2": 52.68
+  }
+}

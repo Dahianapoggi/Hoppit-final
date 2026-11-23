@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOPPIT · Términos y consentimientos</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icono-180.png">
+
+<link rel="stylesheet" href="vendor/fuentes/fuentes.css">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="pantalla-terminos">
+
+<!-- Aceptación de términos (DFE-10). Un bloque por documento, con su casilla propia y sin
+     casillas premarcadas (ley 25.326, art. 5; ARQ-56). -->
+<main class="pagina">
+  <div class="terminos-col">
+    <div class="eyebrow">Primer ingreso</div>
+    <h1>Antes de empezar</h1>
+    <p class="bajada">Para usar HOPPIT hay que aceptar cada uno de estos documentos
+      por separado. Se registra qué versión aceptaste y cuándo.</p>
+    <div class="progreso" id="progreso" hidden><span class="num" id="progreso-cuenta"></span>
+      <div class="pb"><i id="progreso-barra"></i></div><span>aceptados</span></div>
+
+    <div id="documentos"><p class="cargando">Cargando los documentos…</p></div>
+  </div>
+  <div class="terminos-pie">
+    <div class="in">
+      <button class="btn" id="aceptar" type="button" disabled>Aceptar y continuar</button>
+      <span class="hint" id="pie">Marcá cada documento para continuar.</span>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="js/terminos.js"></script>
+</body>
+</html>

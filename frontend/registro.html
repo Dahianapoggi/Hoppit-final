@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOPPIT · Crear cuenta</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icono-180.png">
+
+<!-- IBM Plex vendorizado, no por red (FE-05). -->
+<link rel="stylesheet" href="vendor/fuentes/fuentes.css">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="acceso-marca">
+
+<!-- Registro con invitación (DFE-28; B-246, B-248). Sigue al ingreso (DFE-09)
+     y a su panel de marca (rediseño 2026-11). -->
+<aside class="acceso-panel" aria-hidden="true">
+  <svg class="red" viewBox="0 0 400 400" fill="none" stroke="#34383A" stroke-width="2">
+    <path d="M20 80 L140 40 L260 110 L380 60 M140 40 L120 180 L260 110 L300 240 L380 60 M120 180 L40 260 L180 300 L300 240 L360 360 M180 300 L120 180 M40 260 L20 80"/>
+    <g fill="#34383A"><circle cx="140" cy="40" r="6"/><circle cx="260" cy="110" r="6"/><circle cx="120" cy="180" r="6"/><circle cx="300" cy="240" r="6"/><circle cx="180" cy="300" r="6"/></g>
+  </svg>
+  <div class="logo"><span class="circ"><img src="img/hoppit-isotipo.png" alt=""></span><b>HOPPIT</b></div>
+  <h2>Te invitaron a sumarte a la operación.</h2>
+  <p>Con el código que te dio un operador creás tu cuenta. Vale una sola vez y vence; el rol lo fija la invitación.</p>
+</aside>
+
+<main class="pagina">
+  <div class="ingreso-caja">
+    <span class="wordmark">HOPPIT</span>
+    <h1>Crear cuenta</h1>
+    <p class="bajada">Completá los datos con el código de invitación. Vale una sola vez y vence.</p>
+
+    <!-- Información al pedir los datos (ley 25.326, art. 6). -->
+    <div class="ingreso-motivo registro-aviso" id="aviso-datos">
+      <b>Qué datos pedimos y para qué.</b> Un nombre de usuario, un nombre visible y una
+      contraseña, sólo para que puedas ingresar y para registrar quién hizo cada acción en
+      HOPPIT. No pedimos correo ni teléfono. La contraseña no se guarda tal cual: se guarda un
+      resumen que no permite recuperarla. El texto completo está en los términos que vas a
+      aceptar en tu primer ingreso.
+    </div>
+
+    <form id="formulario" novalidate>
+      <div class="campo">
+        <label for="codigo">Código de invitación</label>
+        <div class="inp codigo"><input id="codigo" name="codigo" autocomplete="off" spellcheck="false"
+          placeholder="XXXX-XXXX-XXXX-XXXX" required></div>
+      </div>
+      <div class="dos-col">
+        <div class="campo">
+          <label for="usuario">Usuario</label>
+          <div class="inp"><input id="usuario" name="usuario" autocomplete="username" spellcheck="false" required></div>
+        </div>
+        <div class="campo">
+          <label for="nombre">Nombre visible</label>
+          <div class="inp"><input id="nombre" name="nombre" autocomplete="name" required></div>
+        </div>
+      </div>
+      <div class="help help-dos">Con el usuario vas a ingresar; el nombre visible lo ven los demás, por ejemplo al lado de un resultado que declares.</div>
+      <div class="campo">
+        <label for="contrasena">Contraseña</label>
+        <div class="inp con-icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg><input id="contrasena" name="contrasena" type="password" autocomplete="new-password" required></div>
+        <div class="fuerza" id="fuerza" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="help" id="regla-contrasena">Al menos 12 caracteres. Podés usar una frase.</div>
+      </div>
+      <div class="campo">
+        <label for="confirmacion">Repetí la contraseña</label>
+        <div class="inp con-icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg><input id="confirmacion" name="confirmacion" type="password" autocomplete="new-password" required></div>
+      </div>
+      <div id="error" role="alert"></div>
+      <button class="btn-ancho" id="crear" type="submit" disabled>Crear la cuenta</button>
+    </form>
+
+    <div id="listo" class="registro-listo" hidden></div>
+
+    <p class="ingreso-nota centrada"><a href="ingreso.html" id="ya-tengo-cuenta">Ya tengo cuenta</a></p>
+  </div>
+</main>
+
+<script type="module" src="js/registro.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/incidentes",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "tipo": "siniestro",
+      "alcance": "parcial",
+      "rutas_afectadas": [
+        "ruta-inexistente"
+      ]
+    }
+  },
+  "respuesta": {
+    "estado": 422,
+    "cuerpo": {
+      "codigo": "rutas_inexistentes",
+      "mensaje": "Rutas afectadas que no existen: ruta-inexistente",
+      "detalle": {
+        "rutas": [
+          "ruta-inexistente"
+        ]
+      }
+    }
+  },
+  "nota": "Una Ruta afectada que no existe: el detalle lleva todas las que faltan, y no se registra nada."
+}

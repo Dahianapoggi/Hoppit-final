@@ -1,0 +1,48 @@
+#cloud-config
+# Preparacion de la maquina (seccion 1.4 de ARQ_Pedido2; 2026-10-27B, D):
+# Docker Engine y Compose desde el repositorio oficial de Docker, swap en el
+# disco del sistema, disco de datos montado por su ruta estable en
+# /srv/hoppit, los directorios de la seccion 1.3 y actualizaciones de
+# seguridad sin reinicio automatico (un reinicio no previsto durante la
+# demostracion es peor que una ventana sin parches de dias).
+
+package_update: true
+packages:
+  - ca-certificates
+  - curl
+  - unattended-upgrades
+
+write_files:
+  - path: /etc/apt/apt.conf.d/52hoppit-sin-reinicio
+    content: |
+      Unattended-Upgrade::Automatic-Reboot "false";
+
+runcmd:
+  # Docker Engine y el complemento Compose, del repositorio oficial.
+  - install -m 0755 -d /etc/apt/keyrings
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  - chmod a+r /etc/apt/keyrings/docker.asc
+  - sh -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" > /etc/apt/sources.list.d/docker.list'
+  - apt-get update
+  - apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  - usermod -aG docker ${usuario}
+  # Swap en el disco del sistema: con 1 GiB de memoria es parte del
+  # funcionamiento, no un margen (seccion 1.9).
+  - fallocate -l ${tamano_swap_gib}G /swapfile
+  - chmod 600 /swapfile
+  - mkswap /swapfile
+  - swapon /swapfile
+  - sh -c 'echo "/swapfile none swap sw 0 0" >> /etc/fstab'
+  # Disco de datos: se formatea solo si no tiene sistema de archivos, para
+  # que recrear la maquina no borre los datos.
+  - sh -c 'DISCO=/dev/disk/azure/scsi1/lun${lun_del_disco}; for i in $(seq 1 30); do [ -e "$DISCO" ] && break; sleep 2; done; blkid "$DISCO" || mkfs.ext4 -L hoppit-datos "$DISCO"'
+  - mkdir -p /srv/hoppit
+  - sh -c 'echo "LABEL=hoppit-datos /srv/hoppit ext4 defaults,nofail 0 2" >> /etc/fstab'
+  - mount -a
+  # Directorios de la seccion 1.3. Las bases son del usuario sin privilegios
+  # de la imagen del backend; los secretos, solo de lectura.
+  - mkdir -p /srv/hoppit/datos/nucleo /srv/hoppit/datos/telemetria /srv/hoppit/secretos /srv/hoppit/caddy/datos /srv/hoppit/caddy/config /srv/hoppit/respaldos /srv/hoppit/compose
+  - chown -R ${uid_del_servicio}:${uid_del_servicio} /srv/hoppit/datos
+  - chown ${uid_del_servicio}:${uid_del_servicio} /srv/hoppit/secretos
+  - chmod 700 /srv/hoppit/secretos
+  - chown ${usuario}:${usuario} /srv/hoppit/compose /srv/hoppit/respaldos

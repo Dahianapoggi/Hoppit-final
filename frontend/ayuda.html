@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOPPIT · Ayuda</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icono-180.png">
+
+<link rel="stylesheet" href="vendor/fuentes/fuentes.css">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="pantalla-ayuda">
+
+<div class="topbar">
+  <span class="wordmark">HOPPIT</span>
+  <span class="vr"></span>
+  <span class="screen-title">Ayuda</span>
+  <span class="spacer"></span>
+  <label class="buscador"><span class="sr">Buscar una palabra</span>
+    <input id="buscar-palabra" type="search" placeholder="Buscar una palabra" autocomplete="off"></label>
+  <a class="btn-ghost" id="ingresar" href="ingreso.html" hidden>Ingresar</a>
+</div>
+
+<!-- Ayuda breve (DFE-33; rediseño 2026-11 con la propuesta aprobada; fila 24
+     y N34 de 2026-10-20A). Las definiciones resumen las del glosario (cuarta
+     versión) sin cambiarles el sentido; la capacidad efectiva no está en el
+     glosario y se toma de la regla de la operación (B-221). -->
+<main class="pagina">
+  <div class="cuerpo-ancho">
+    <div class="ayuda-grid">
+      <nav class="indice" aria-label="Índice de la ayuda">
+        <div class="eyebrow">Las palabras</div>
+        <a href="#orden" class="on">Orden y Parada</a>
+        <a href="#ruta">Ruta y Plan</a>
+        <a href="#vehiculo">Vehículo y Flota</a>
+        <a href="#capacidad">Capacidad efectiva</a>
+        <a href="#estados">Estados de la Orden</a>
+        <div class="sep"></div>
+        <div class="eyebrow">Las pantallas</div>
+        <a href="#jornada">Jornada</a>
+        <a href="#seguimiento">Seguimiento</a>
+        <a href="#cuenta">Cuenta y sistema</a>
+      </nav>
+      <div>
+        <h2 class="ayuda-sec" id="titulo-palabras">Las palabras</h2>
+        <div class="terminos-grid">
+          <section class="tarjeta term" id="orden"><h3><span class="ico" data-icono="caja"></span>Orden</h3>
+            <p>Un pedido de llevar un envío a un destino. Dice adónde va, cuántos bultos lleva, su prioridad y, si lo hay, el plazo comprometido.</p></section>
+          <section class="tarjeta term"><h3><span class="ico" data-icono="pin"></span>Parada</h3>
+            <p>Cada visita que hace un Vehículo dentro de una Ruta. Se nombra por su número en la Ruta, y agrupa las Órdenes que van a la misma esquina.</p></section>
+          <section class="tarjeta term" id="ruta"><h3><span class="ico" data-icono="planificar"></span>Ruta</h3>
+            <p>El recorrido de un Vehículo: sus Paradas en orden, saliendo del Depósito y volviendo a él. Cada planificación arma una Ruta por Vehículo usado.</p></section>
+          <section class="tarjeta term"><h3><span class="ico" data-icono="plan"></span>Plan de Distribución</h3>
+            <p>Todas las Rutas que salen de una misma planificación, con sus totales: Rutas, Paradas, bultos y distancia. Un Vehículo está en un solo plan por jornada.</p></section>
+          <section class="tarjeta term" id="vehiculo"><h3><span class="ico" data-icono="camion"></span>Vehículo y Flota</h3>
+            <p>Un medio de transporte con una capacidad de carga en bultos. Lo que lleva y lo que le queda libre dependen de la Ruta que tiene asignada. La Flota es el conjunto de Vehículos con los que se trabaja.</p></section>
+          <section class="tarjeta term"><h3><span class="ico" data-icono="deposito"></span>Depósito</h3>
+            <p>El lugar del que salen y al que vuelven las Rutas.</p></section>
+          <section class="tarjeta term ancho" id="capacidad"><h3><span class="ico" data-icono="chip"></span>Capacidad efectiva</h3>
+            <p>Lo que se carga de verdad en un Vehículo: su capacidad menos un margen del 5 %, redondeado hacia abajo. Un Vehículo de 13 bultos lleva hasta 12.</p></section>
+          <section class="tarjeta term ancho" id="estados"><h3><span class="ico" data-icono="ordenes"></span>Estados de la Orden</h3>
+            <div class="estados-fila">
+              <div><span class="stchip st-creada">Creada</span>Registrada, todavía sin Ruta.</div>
+              <div><span class="stchip st-planificada">Planificada</span>Asignada a una Parada de una Ruta que todavía no salió.</div>
+              <div><span class="stchip st-en_transito">En tránsito</span>Su Ruta salió del Depósito.</div>
+              <div><span class="stchip st-completada">Completada</span>Entregada.</div>
+              <div><span class="stchip st-fallida">Fallida</span>No se pudo entregar.</div>
+            </div>
+            <p>El glosario prevé además Reprogramada, Devuelta y Cancelada, que todavía no se usan.</p></section>
+        </div>
+
+        <h2 class="ayuda-sec" id="titulo-pantallas">Las pantallas</h2>
+        <div class="terminos-grid">
+          <section class="tarjeta term" id="jornada"><h3><span class="ico" data-icono="inicio"></span>Jornada</h3>
+            <p><b>Inicio</b>: el resumen del día y los accesos a las tareas. <b>Registrar Orden</b>: alta marcando el destino en el mapa. <b>Órdenes</b>: todas, con filtros, su historial y quién declaró cada resultado. <b>Planificar</b>: elegir Órdenes y Vehículos y armar el plan. <b>Plan de rutas</b>: el mapa, el despacho y el resultado de cada Parada.</p></section>
+          <section class="tarjeta term" id="seguimiento"><h3><span class="ico" data-icono="incidentes"></span>Seguimiento</h3>
+            <p><b>Incidentes</b>: registrar algo que afecta el plan, como un corte de calle; no cambia ninguna Ruta. <b>Alertas</b>: avisos calculados cada minuto (un Incidente sobre una Ruta con entregas, una Orden sin planificar hace más de 48 horas o un plazo en riesgo); mirarlas no cambia nada.</p></section>
+          <section class="tarjeta term ancho" id="cuenta"><h3><span class="ico" data-icono="usuario"></span>Cuenta y sistema</h3>
+            <p><b>Crear cuenta</b>: registrarse con un código de invitación que da un operador. <b>Acerca de</b>: la versión de HOPPIT y de dónde salen sus datos.</p></section>
+        </div>
+        <p class="vacio-texto" id="sin-resultados" hidden>Ninguna palabra coincide con la búsqueda.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="js/ayuda.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOPPIT · Transportista</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icono-180.png">
+
+<link rel="stylesheet" href="vendor/fuentes/fuentes.css">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="pantalla-transportista">
+
+<!-- Pantalla del transportista en la web (DFE-15; rediseño 2026-11 con la
+     propuesta aprobada). La operación del transportista es de su aplicación,
+     que no está construida: la pantalla lo dice y no simula nada. -->
+<main class="pagina">
+  <section class="tarjeta transportista-tarjeta">
+    <div class="tel" aria-hidden="true"><img src="img/hoppit-isotipo.png" alt=""></div>
+    <span class="pill">Aplicación en desarrollo</span>
+    <h1 id="saludo">Hola</h1>
+    <p>Tu trabajo en HOPPIT se hace desde la aplicación del transportista, en el teléfono: ver tu
+      Ruta, avanzar Parada por Parada y declarar el resultado de cada una.</p>
+    <p><b>La aplicación todavía no se puede usar.</b> Mientras tanto, el resultado de cada Parada
+      lo registra el operador desde su pantalla. Esta página web es para quienes planifican y
+      controlan la operación.</p>
+    <button class="btn btn-osc btn-con-icono" type="button" id="salir"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4M10 16l-4-4 4-4M6 12h10"/></svg>Cerrar sesión</button>
+  </section>
+</main>
+
+<script type="module" src="js/transportista.js"></script>
+</body>
+</html>

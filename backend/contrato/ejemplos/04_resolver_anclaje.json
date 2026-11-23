@@ -1,0 +1,34 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/anclajes?lat=-34.4718&lon=-58.5074",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "consultado": {
+        "lat": -34.4718,
+        "lon": -58.5074
+      },
+      "nodo": {
+        "nodo": 29886059,
+        "lat": -34.4716552,
+        "lon": -58.507401,
+        "rotulo": {
+          "texto": "Avenida 25 de Mayo y Roque Sáenz Peña",
+          "origen": "cruce_de_calles",
+          "calles": [
+            "Avenida 25 de Mayo",
+            "Roque Sáenz Peña"
+          ]
+        }
+      },
+      "distancia_m": 16.101309078673907,
+      "es_el_deposito": false
+    }
+  },
+  "nota": "Consulta SIN EFECTO: no crea ninguna Orden. Devuelve a que nodo del grafo engancharia la coordenada y a cuantos metros, que es lo que permite juzgar el resultado ANTES de registrar --un enganche a 18 m es correcto, uno a 300 m es un dato para revisar--. Resuelve al mismo nodo que resolveria el alta. `es_el_deposito` avisa que registrar ahi seria rechazado por el flujo 4b de CU-01."
+}

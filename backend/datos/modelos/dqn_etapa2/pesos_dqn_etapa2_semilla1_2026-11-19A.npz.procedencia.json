@@ -1,0 +1,117 @@
+{
+ "formato": "dqn_etapa_2_npz_v1",
+ "codificacion": {
+  "nombre": "observacion_etapa_2",
+  "version": 1,
+  "tamano": 46,
+  "acciones": 4
+ },
+ "sha256": "7a3378229b39ee4184261cf23435320b67dca0278c16381627a2bbe384176fe3",
+ "rotulo": "simulacion sobre instancias sorteadas en CABA; no es validacion contra datos reales",
+ "sesion": "2026-11-19A",
+ "semilla": 1,
+ "semillas_derivadas": {
+  "red": 3347623044,
+  "buffer": 2231289216,
+  "exploracion": 1997538923,
+  "episodios": 2606560474
+ },
+ "presupuesto_de_pasos": 500000,
+ "pasos": 500000,
+ "episodios": 1116,
+ "pasos_de_gradiente": 498001,
+ "pesos": "los del ultimo paso",
+ "hiperparametros": {
+  "ocultas": 128,
+  "capas_ocultas": 2,
+  "adam": 0.001,
+  "lote": 64,
+  "buffer": 100000,
+  "inicio_del_aprendizaje": 2000,
+  "copia_de_la_red_objetivo": 1000,
+  "perdida": "Huber",
+  "recorte_del_gradiente": 10.0,
+  "epsilon": [
+   1.0,
+   0.05,
+   0.3
+  ],
+  "descuento": 1.0,
+  "escala_de_la_recompensa_min": 60.0
+ },
+ "entorno": {
+  "regla_de_regreso": "R3",
+  "escenarios": [
+   [
+    "R3_c06_p03",
+    60,
+    0.3
+   ],
+   [
+    "R3_c06_p05",
+    60,
+    0.5
+   ],
+   [
+    "R3_c06_p07",
+    60,
+    0.7
+   ],
+   [
+    "R3_c08_p03",
+    80,
+    0.3
+   ],
+   [
+    "R3_c08_p05",
+    80,
+    0.5
+   ],
+   [
+    "R3_c08_p07",
+    80,
+    0.7
+   ],
+   [
+    "R3_c10_p03",
+    100,
+    0.3
+   ],
+   [
+    "R3_c10_p05",
+    100,
+    0.5
+   ],
+   [
+    "R3_c10_p07",
+    100,
+    0.7
+   ]
+  ],
+  "conjunto_de_entrenamiento": 3,
+  "jornadas_de_entrenamiento": 1000,
+  "conjunto_de_validacion": 4,
+  "capacidad": 20,
+  "vehiculos": 3,
+  "penalidad_por_diferido_min": 60.0
+ },
+ "sha256_de_insumos": {
+  "insumos_del_simulador": "7ce94fe1c5a1fc4b211a7ae7f52e8131162eb85a499f1d6654f44a3ff614e720",
+  "tabla": "70fa544f003b11fe87cb1332a0974fbd1a4219726ada6b684987940c75b7340a",
+  "forma_de_llegada": "3e85023eeb8dd8e9b1f52622253fb6b9864ef486f026849d4232bfd7c1b9604a",
+  "indice_de_matrices_conjunto_3": [
+   "e22a94a018da4906a282cfeee73c317581798f865825d76b30ef61b194d50ea3"
+  ],
+  "indice_de_matrices_conjunto_4": [
+   "e56a84455a2b6c43d15b36a776028122682494569f5728e63143ba01b56d45dc"
+  ]
+ },
+ "versiones": {
+  "python": "3.13.15",
+  "numpy": "2.5.3",
+  "torch": "2.14.1+cpu",
+  "plataforma": "Windows-11-10.0.26300-SP0"
+ },
+ "segundos": 1059.0398189999978,
+ "torch_deterministico": true
+}

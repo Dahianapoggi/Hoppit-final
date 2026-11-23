@@ -1,0 +1,21 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/registros",
+    "cuerpo": {
+      "codigo": "<codigo de invitacion: de un solo uso, omitido en los ejemplos>",
+      "usuario": "registro-de-ejemplo",
+      "nombre_visible": "Cuenta registrada de ejemplo",
+      "contrasena": "<contrasena: omitida en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 201,
+    "cuerpo": {
+      "usuario": "registro-de-ejemplo",
+      "nombre_visible": "Cuenta registrada de ejemplo",
+      "rol": "operador"
+    }
+  },
+  "nota": "Crea la cuenta con el rol de la invitacion, que se genera con `tools/crear_invitacion.py` y queda usada en la misma transaccion. No inicia sesion: se ingresa despues con `POST /v1/sesiones` y se aceptan los terminos. Sin verificacion por correo: la cuenta no guarda correo (ARQ-55)."
+}

@@ -1,0 +1,9 @@
+# Plantilla del .env de la maquina (/srv/hoppit/compose/.env). Ningun valor
+# es secreto (ARQ_Pedido2, seccion 1.6). Completar cada <completar>; el
+# dominio y la cuenta del registro no se escriben en el repositorio.
+HOPPIT_DOMINIO=<completar: nombre del sitio, por ejemplo el subdominio de DuckDNS>
+HOPPIT_REGISTRO=<completar: ghcr.io/<cuenta>>
+VERSION_BORDE=<completar: SHA del commit>
+VERSION_NUCLEO=<completar: SHA del commit>
+VERSION_TELEMETRIA=<completar: SHA del commit>
+HOPPIT_RAIZ_DE_DATOS=/srv/hoppit

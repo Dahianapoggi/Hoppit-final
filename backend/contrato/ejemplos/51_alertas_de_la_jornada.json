@@ -1,0 +1,37 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/alertas?jornada=2026-08-24",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "jornada": "2026-08-24",
+      "evaluadas_en": "2026-08-24T16:00:00Z",
+      "alertas": [
+        {
+          "tipo": "incidente_en_ruta",
+          "motivo": "Incidente de tipo corte de calle sobre la Ruta, que tiene 5 Órdenes sin terminar.",
+          "desde": "2026-08-24T15:00:00Z",
+          "ruta": "ruta-1d8aad4ec546",
+          "orden": null,
+          "ordenes": [
+            "orden-02",
+            "orden-14",
+            "orden-06",
+            "orden-07",
+            "orden-03"
+          ],
+          "incidente": "incidente-de-ejemplo-01",
+          "eta_p50": null,
+          "eta_p90": null,
+          "plazo_comprometido": null
+        }
+      ]
+    }
+  },
+  "nota": "CU-08. Derivadas por reglas al consultar y no persistidas: una condicion vigente es una sola alerta, y consultar no cambia ninguna Orden ni ninguna Ruta. Reglas propuestas en B-259, punto 3."
+}

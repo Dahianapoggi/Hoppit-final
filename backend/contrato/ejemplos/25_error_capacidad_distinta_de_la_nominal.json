@@ -1,0 +1,31 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/planificaciones",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "vehiculos": {
+        "AE472LP": 20
+      }
+    }
+  },
+  "respuesta": {
+    "estado": 422,
+    "cuerpo": {
+      "codigo": "capacidad_distinta_de_la_nominal",
+      "mensaje": "1 Vehiculo(s) con una capacidad distinta de la nominal: AE472LP pedido con 20 y nominal 13. La capacidad de cada Vehiculo es la registrada en la Flota.",
+      "detalle": {
+        "vehiculos": [
+          {
+            "vehiculo_id": "AE472LP",
+            "capacidad_pedida": 20,
+            "capacidad_nominal": 13
+          }
+        ]
+      }
+    }
+  },
+  "nota": "La capacidad es un atributo del Vehiculo, su capacidad nominal (glosario, entidad 4), y no un parametro de la corrida: se envia la que publica /v1/flota. Cada Vehiculo rechazado lleva la capacidad pedida y la nominal, que es la que hay que enviar. Se rechaza tanto una mayor como una menor."
+}

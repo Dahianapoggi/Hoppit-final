@@ -1,0 +1,65 @@
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Bytecode y caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de Referencia
+referencia/*
+
+# Instalación editable / empaquetado
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Caché de herramientas de verificación
+.mypy_cache/
+.pytest_cache/
+.import_linter_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Editores y sistema operativo
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Artefactos de datos: el grafo vial versionado SÍ se commitea
+# (ver CLAUDE.md, "Formato del artefacto de grafo versionado"), pero
+# cualquier extracción intermedia o caché de OSMnx no.
+backend/datos/cache/
+backend/datos/tmp/
+
+# Base SQLite del estado de una corrida: Ordenes y Rutas de quien la ejecuto.
+# Es estado local, no un artefacto del proyecto, y su ruta es siempre
+# parametro del arranque.
+backend/datos/*.sqlite3
+backend/datos/*.sqlite3-wal
+backend/datos/*.sqlite3-shm
+
+# Cache de respuestas de Overpass y Nominatim. OSMnx la crea en ./cache
+# cuando no se le fija otra ruta; es redescargable y no es un artefacto.
+cache/
+*.osm
+*.osm.pbf
+
+# LaDe: cientos de MB redescargables desde una revision fija de Hugging
+# Face, no corresponde versionarlos. El sidecar de procedencia si, que es
+# lo que permite verificar de que revision salio cada copia local.
+# La primera regla ignora archivos y no directorios: sin la segunda linea,
+# git no puede volver a incluir nada de adentro de un directorio ignorado.
+backend/datos/lade/**
+!backend/datos/lade/**/
+!backend/datos/lade/**/*.procedencia.json
+backend/datos/lade/**/*.parcial
+
+# Claves de firma de las sesiones (tools/generar_claves_de_firma.py). La
+# privada nunca se versiona.
+backend/datos/claves/

@@ -1,0 +1,17 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/rutas/ruta-inexistente",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 404,
+    "cuerpo": {
+      "codigo": "ruta_no_encontrada",
+      "mensaje": "Ruta ruta-inexistente no existe",
+      "detalle": null
+    }
+  }
+}

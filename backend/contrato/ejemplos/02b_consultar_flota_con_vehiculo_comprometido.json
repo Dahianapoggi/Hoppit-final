@@ -1,0 +1,44 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/flota",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "vehiculos": [
+        {
+          "id": "AE472LP",
+          "capacidad": 13,
+          "capacidad_efectiva": 12,
+          "disponible": false,
+          "comprometido_en": "plan-87a6569fb0e6"
+        },
+        {
+          "id": "AF815MT",
+          "capacidad": 13,
+          "capacidad_efectiva": 12,
+          "disponible": true,
+          "comprometido_en": null
+        },
+        {
+          "id": "AG309RB",
+          "capacidad": 13,
+          "capacidad_efectiva": 12,
+          "disponible": true,
+          "comprometido_en": null
+        }
+      ],
+      "capacidad_total": 39,
+      "fecha": "2026-08-24",
+      "capacidad_disponible": 26,
+      "margen_de_capacidad": 0.05,
+      "capacidad_efectiva_total": 36,
+      "capacidad_efectiva_disponible": 24
+    }
+  },
+  "nota": "La misma Flota despues de una planificacion. El Vehiculo que tiene Ruta en un Plan de esta jornada informa `disponible: false` y nombra el Plan que lo ocupa, de modo que la correccion sea concreta: liberar ese Plan o elegir otro Vehiculo. `capacidad_disponible` baja en consecuencia y es el techo real de lo que se puede planificar hoy. La disponibilidad se deriva de las Rutas vigentes: descartar el Plan devuelve el Vehiculo a disponible."
+}

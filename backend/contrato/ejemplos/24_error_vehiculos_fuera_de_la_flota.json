@@ -1,0 +1,28 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/planificaciones",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "vehiculos": {
+        "AE472LP": 13,
+        "vehiculo-ajeno": 20
+      }
+    }
+  },
+  "respuesta": {
+    "estado": 422,
+    "cuerpo": {
+      "codigo": "vehiculos_fuera_de_la_flota",
+      "mensaje": "1 Vehiculo(s) no pertenecen a la Flota: vehiculo-ajeno. Solo se planifica con Vehiculos de la Flota registrada.",
+      "detalle": {
+        "vehiculos": [
+          "vehiculo-ajeno"
+        ]
+      }
+    }
+  },
+  "nota": "Solo se planifica con Vehiculos de la Flota que publica /v1/flota. Un identificador ajeno no designa ningun Vehiculo: no tiene capacidad nominal, y con nombres libres un mismo Vehiculo podria entrar con otro nombre en un segundo Plan de la jornada. `detalle.vehiculos` nombra cada identificador rechazado. Se rechaza la seleccion entera, aunque traiga Vehiculos validos. 422 y no 409: no depende del estado del sistema, y la misma peticion fallaria siempre."
+}

@@ -1,0 +1,22 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/estado"
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "producto": "HOPPIT",
+      "version": "1.0.0",
+      "contrato": "v1",
+      "grafo": {
+        "archivo": "grafo_san_isidro_2026-08-16.graphml",
+        "ambito": "San Isidro",
+        "sha256": "c25f952a713c",
+        "verificado": false
+      },
+      "notificaciones_pendientes": 0
+    }
+  },
+  "nota": "Version del producto y version del contrato, que son distintas: la del producto avanza con cada entrega, la del contrato --la que esta en la ruta-- solo cambia si se rompe compatibilidad."
+}

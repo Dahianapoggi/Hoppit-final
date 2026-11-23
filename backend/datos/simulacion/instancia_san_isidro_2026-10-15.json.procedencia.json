@@ -1,0 +1,22 @@
+{
+  "artefacto": "instancia",
+  "ambito": "San Isidro",
+  "fuente": "instancia canonica de demostracion (tools/escenario_demostracion.py) armada por tools/servir_api.construir_contexto",
+  "herramienta": "hoppit 0.11.0, osmnx 2.1.1, ortools 9.15.6755",
+  "momento_utc": "2026-10-15T05:17:19.273965+00:00",
+  "parametros": {
+    "jornada": "2026-09-27",
+    "semilla_de_instancia": 20260817,
+    "base": "SQLite temporal nueva, descartada al terminar",
+    "deposito": "deposito_san_isidro_2026-08-17.json",
+    "coordenadas": "las del nodo en el grafo vial de San Isidro que carga cartografia, indicado de forma explicita (GRAFO_PREDETERMINADO de bootstrap.py)",
+    "distancias_por_la_red": "cartografia.matriz_de_costos sobre el Deposito y los nodos de las Ordenes, la misma que optimiza el solver: camino minimo en metros, por fila el origen y por columna el destino",
+    "margen_de_capacidad": 0.05,
+    "capacidad_efectiva_por_vehiculo": {
+      "AE472LP": 12,
+      "AF815MT": 12,
+      "AG309RB": 12
+    },
+    "sha256": "f51a369ada113413d49d3f60eff0da4270e6ab83b446e89bcd1767f413f3a9ce"
+  }
+}

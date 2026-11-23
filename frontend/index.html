@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOPPIT · Plan de rutas</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icono-180.png">
+
+<!-- Leaflet vendorizado, no por CDN: la aplicacion corre en local (B-02) y
+     no deberia depender de la red para arrancar. -->
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+
+<!-- Pendiente: servir IBM Plex desde el proyecto por el mismo motivo. Hoy
+     llega de Google Fonts y es la unica dependencia de red que queda. -->
+<!-- IBM Plex vendorizado, no por red (FE-05). Mismo criterio que Leaflet. -->
+<link rel="stylesheet" href="vendor/fuentes/fuentes.css">
+
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<div class="topbar">
+  <span class="wordmark">HOPPIT</span>
+  <span class="vr"></span>
+  <h1 class="screen-title">Plan de rutas</h1>
+  <!-- CU-03 paso 1: el operador solicita las Rutas de una jornada. El campo
+       alimenta el filtro `fecha` que el contrato ya publica en GET /v1/rutas.
+       No hay navegacion entre jornadas porque no hay forma de preguntarle al
+       backend que jornadas tienen Rutas. -->
+  <div class="datectl">
+    <label class="cap" for="fecha">Jornada</label>
+    <input class="val fecha-input" type="date" id="fecha">
+  </div>
+  <span class="spacer"></span>
+  <span class="pulso" id="estado-del-plan" hidden></span>
+  <!-- Disparador de nueva planificación, alojado en G1-A por decisión (FE-07).
+       NAVEGA a G1-B, nunca ejecuta el cálculo acá: un control que navega no
+       viola la postcondición de CU-03 —la pantalla sigue siendo de sólo
+       lectura y quien muta estado es CU-02, en su propia pantalla—. Se violaría
+       si la planificación se ejecutara desde acá sin salir.
+       Va al extremo opuesto de la barra, separado por el espaciador, para no
+       competir con el campo de jornada; el encabezado del Plan vive en el riel. -->
+  <a class="btn btn-con-icono" id="nueva-planificacion" href="planificacion.html"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>Nueva planificación</a>
+</div>
+
+<div class="body">
+  <div class="rail">
+    <!-- El encabezado del Plan de Distribucion es un nivel propio, por encima
+         de las Rutas. Se construyo como pieza separada para que el pliegue de
+         la alternativa B sea incorporable sin rehacer el riel el dia que
+         exista identidad de plan y haya planes concurrentes. -->
+    <div class="plan-head" id="plan-head"></div>
+    <div class="rail-head" id="rail-head">
+      <h2 class="eyebrow" id="rail-titulo">Rutas publicadas</h2>
+      <div id="rail-filtro"></div>
+    </div>
+    <div class="rail-list" id="rail-list"></div>
+    <div class="rail-foot" id="rail-foot"></div>
+  </div>
+
+  <div class="map">
+    <div id="mapa"></div>
+
+    <!-- Único control sobre el mapa: repetir la construcción del recorrido.
+         Sin texto y sin cartel. Que lo que se ve es un plan calculado y no el
+         movimiento de un vehículo lo aclara el equipo durante la exposición;
+         un cartel permanente ocupaba la esquina del mapa para decirlo. -->
+    <button type="button" class="rehacer" id="rever" hidden
+            title="Repetir la animación del recorrido en el mapa">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 5v14l12-7z" fill="currentColor"/></svg>
+      <span>Ver el recorrido</span>
+    </button>
+
+    <details class="legend" id="leyenda" open>
+      <summary class="h">Referencias</summary>
+      <div id="legend-rutas"></div>
+      <div class="lrow"><span class="lsq"></span>Depósito · origen y retorno</div>
+      <div class="foot">El recorrido sigue los arcos del grafo vial. Un tramo puede recorrerse en ambos sentidos.</div>
+    </details>
+
+    <div class="aviso" id="aviso" hidden>
+      <div class="caja">
+        <div class="t" id="aviso-tipo">Cargando</div>
+        <h3 id="aviso-titulo">Consultando el plan…</h3>
+        <p id="aviso-texto"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

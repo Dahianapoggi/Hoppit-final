@@ -1,0 +1,17 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/ordenes/orden-inexistente",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 404,
+    "cuerpo": {
+      "codigo": "orden_no_encontrada",
+      "mensaje": "Orden orden-inexistente no existe",
+      "detalle": null
+    }
+  }
+}

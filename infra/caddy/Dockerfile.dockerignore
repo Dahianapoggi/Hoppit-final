@@ -1,0 +1,18 @@
+# Contexto del borde, la raiz del repositorio: entran solo la interfaz, la
+# aplicacion del transportista (sin sus dependencias ni lo exportado, que se
+# rehacen en la imagen) y el Caddyfile. Ni el backend, ni `referencia/`, ni
+# `.git`, ni bases, claves o entornos.
+**
+!infra/caddy/Caddyfile
+!frontend/
+!frontend/**
+frontend/**/*.md
+!movil/
+!movil/**
+movil/node_modules
+movil/dist
+movil/.expo
+movil/web-build
+movil/**/*.md
+**/.env
+**/.env.*

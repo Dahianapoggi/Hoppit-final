@@ -1,0 +1,23 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/ordenes",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 403,
+    "cuerpo": {
+      "codigo": "terminos_no_aceptados",
+      "mensaje": "Faltan aceptar terminos o consentimientos vigentes: terminos_de_uso, consentimiento_transferencia_internacional",
+      "detalle": {
+        "pendientes": [
+          "terminos_de_uso",
+          "consentimiento_transferencia_internacional"
+        ]
+      }
+    }
+  },
+  "nota": "Sesion valida con terminos pendientes: el detalle lista los documentos que faltan."
+}

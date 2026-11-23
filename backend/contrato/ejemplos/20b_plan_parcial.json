@@ -1,0 +1,105 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/planificaciones",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "vehiculos": {
+        "AE472LP": 13
+      }
+    }
+  },
+  "respuesta": {
+    "estado": 201,
+    "cuerpo": {
+      "plan": {
+        "id": "plan-f770456603f6",
+        "fecha_planificacion": "2026-08-24",
+        "cantidad_rutas": 1,
+        "cantidad_paradas": 10,
+        "demanda_total": 12,
+        "distancia_total_m": 17830.251637918012,
+        "vehiculos": [
+          "AE472LP"
+        ]
+      },
+      "fecha_planificacion": "2026-08-24",
+      "distancia_total_m": 17830.251637918012,
+      "demanda_total": 12,
+      "capacidad_total": 13,
+      "rutas": [
+        {
+          "id": "ruta-8d9d9ef56989",
+          "plan_id": "plan-f770456603f6",
+          "vehiculo_id": "AE472LP",
+          "fecha_planificacion": "2026-08-24",
+          "distancia_m": 17830.251637918012,
+          "carga": 12,
+          "capacidad_vehiculo": 12,
+          "cantidad_paradas": 10,
+          "cantidad_ordenes": 10
+        }
+      ],
+      "ordenes_no_planificadas": [
+        {
+          "orden": "orden-02",
+          "criticidad": 2,
+          "motivo": "demanda_excede_capacidad"
+        },
+        {
+          "orden": "orden-03",
+          "criticidad": 2,
+          "motivo": "demanda_excede_capacidad"
+        },
+        {
+          "orden": "orden-05",
+          "criticidad": 2,
+          "motivo": "demanda_excede_capacidad"
+        },
+        {
+          "orden": "orden-07",
+          "criticidad": 2,
+          "motivo": "demanda_excede_capacidad"
+        },
+        {
+          "orden": "orden-12",
+          "criticidad": 2,
+          "motivo": "demanda_excede_capacidad"
+        },
+        {
+          "orden": "orden-14",
+          "criticidad": 2,
+          "motivo": "demanda_excede_capacidad"
+        },
+        {
+          "orden": "orden-15",
+          "criticidad": 2,
+          "motivo": "demanda_excede_capacidad"
+        },
+        {
+          "orden": "orden-17",
+          "criticidad": 2,
+          "motivo": "demanda_excede_capacidad"
+        },
+        {
+          "orden": "orden-18",
+          "criticidad": 2,
+          "motivo": "demanda_excede_capacidad"
+        },
+        {
+          "orden": "orden-19",
+          "criticidad": 2,
+          "motivo": "demanda_excede_capacidad"
+        },
+        {
+          "orden": "orden-20",
+          "criticidad": 2,
+          "motivo": "demanda_excede_capacidad"
+        }
+      ]
+    }
+  },
+  "nota": "La Flota seleccionada no alcanza para todas las Ordenes, pero entra alguna: un solo Vehiculo, con su capacidad nominal (B-220, punto 2). El Plan sale con 201 y es parcial: el motor deja afuera primero las Ordenes de menor criticidad, y las declara en `ordenes_no_planificadas` con su criticidad y su motivo. Esas Ordenes siguen en Creada. El Vehiculo usa su capacidad efectiva, el 95 % de la nominal redondeado hacia abajo."
+}

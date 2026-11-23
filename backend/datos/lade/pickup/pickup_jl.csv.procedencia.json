@@ -1,0 +1,20 @@
+{
+  "artefacto": "lade",
+  "ambito": "Jilin",
+  "fuente": "Hugging Face Hub -- datasets/Cainiao-AI/LaDe",
+  "herramienta": "requests 2.34.2",
+  "momento_utc": "2026-08-17T04:21:17.721860+00:00",
+  "parametros": {
+    "repositorio": "Cainiao-AI/LaDe",
+    "revision": "be2cec02775cafc8d52230303f32134382bcc50b",
+    "subconjunto": "pickup",
+    "codigo_ciudad": "jl",
+    "ruta_remota": "pickup/pickup_jl.csv",
+    "url": "https://huggingface.co/datasets/Cainiao-AI/LaDe/resolve/be2cec02775cafc8d52230303f32134382bcc50b/pickup/pickup_jl.csv",
+    "bytes": 43801745,
+    "sha256": "ac5b9f76605b544bd19d79703d137c8656c5395dfaeeb297e3b10ea6b30c3eb1",
+    "licencia": "CC BY-NC 4.0",
+    "fuente_de_la_licencia": "paper de LaDe (SIGKDD 2024), seccion 3.1 y datasheet C.6",
+    "licencia_discrepante_en_hugging_face": "apache-2.0"
+  }
+}

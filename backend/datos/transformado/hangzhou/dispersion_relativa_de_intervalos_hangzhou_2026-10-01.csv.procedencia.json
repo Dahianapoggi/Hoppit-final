@@ -1,0 +1,75 @@
+{
+  "artefacto": "dispersion_relativa_de_intervalos",
+  "ambito": "Hangzhou",
+  "fuente": "LaDe-D, delivery_hz.csv",
+  "herramienta": "pandas 3.0.6, numpy 2.5.3, pyproj 3.8.0",
+  "momento_utc": "2026-10-01T15:09:27.485066+00:00",
+  "parametros": {
+    "entrada": {
+      "archivo": "delivery_hz.csv",
+      "repositorio": "Cainiao-AI/LaDe",
+      "revision": "be2cec02775cafc8d52230303f32134382bcc50b",
+      "sha256": "9969df2a5c79dadc6149c384e3632eccc0417d01a2575a74db2310e786541c22",
+      "licencia": "CC BY-NC 4.0"
+    },
+    "ciudad_elegida_por": "B-162, punto 2: tools/transformar_lade.py seleccion",
+    "magnitud": "intervalo entre finalizaciones consecutivas de un mismo transportista en un mismo ds, en minutos (DAT-16); resolucion de un minuto y piso de 5 minutos (DAT-09, B-166)",
+    "alcance": "tareas cerradas en su ds o el siguiente (B-162, punto 4)",
+    "tareas_en_alcance": 1856372,
+    "tareas_excluidas": 5228,
+    "cortes": "B-167: (a) se excluye el intervalo cuya finalizacion previa y siguiente caen en fechas calendario distintas; (b) se excluye el intervalo con una aceptacion del mismo transportista en el mismo ds en (finalizacion previa, finalizacion siguiente]",
+    "conteo_de_cortes": {
+      "intervalos": 1784717,
+      "solo_fecha_calendario": 3902,
+      "solo_regreso_a_la_estacion": 138649,
+      "ambos": 59,
+      "excluidos": 142610,
+      "retenidos": 1642107
+    },
+    "intervalos": 1642107,
+    "uso": "el simulador muestrea el tiempo de parada a parada de la distribucion en minutos de la celda (B-171); los cuantiles relativos y el IC de p90/p50 responden si la dispersion es constante entre celdas",
+    "distancia": "geodesica WGS-84 entre coordenadas de parada consecutivas",
+    "bordes_de_distancia_m": [
+      "0.0",
+      "100.0",
+      "250.0",
+      "500.0",
+      "1000.0",
+      "2000.0",
+      "inf"
+    ],
+    "franja": "hora de la finalizacion previa",
+    "cuantiles": [
+      0.01,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      0.99
+    ],
+    "n_minimo_por_celda": 200,
+    "bootstrap": {
+      "estadistico": "p90/p50",
+      "remuestras": 2000,
+      "nivel_de_confianza": 0.95,
+      "semilla": 20260930,
+      "metodo": "percentil; remuestreo como multinomial sobre las frecuencias"
+    },
+    "sha256": "70fa544f003b11fe87cb1332a0974fbd1a4219726ada6b684987940c75b7340a"
+  }
+}

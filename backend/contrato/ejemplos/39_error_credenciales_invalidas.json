@@ -1,0 +1,19 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/sesiones",
+    "cuerpo": {
+      "usuario": "operador-de-ejemplo",
+      "contrasena": "<contrasena: omitida en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 401,
+    "cuerpo": {
+      "codigo": "credenciales_invalidas",
+      "mensaje": "Usuario o contrasena incorrectos",
+      "detalle": null
+    }
+  },
+  "nota": "Contrasena erronea. El mensaje es el mismo para un usuario inexistente: no dice cual de los dos fallo. Despues de 5 fallos seguidos, el usuario queda bloqueado 900 s (ejemplo 46)."
+}

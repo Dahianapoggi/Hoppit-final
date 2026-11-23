@@ -1,0 +1,31 @@
+{
+  "peticion": {
+    "metodo": "GET",
+    "ruta": "/v1/depositos",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "depositos": [
+        {
+          "punto": {
+            "nodo": 13282860598,
+            "lat": -34.5024581,
+            "lon": -58.537415,
+            "rotulo": {
+              "texto": "Haití",
+              "origen": "via_unica",
+              "calles": [
+                "Haití"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "nota": "FR-14. El origen y retorno de toda Ruta, con independencia de que exista un plan: es precondicion de la planificacion y tiene que poder ubicarse en el mapa antes de que haya Rutas. Es una COLECCION de un elemento: fase 1 opera con un Deposito unico (B-12), pero el glosario admite varios y FR-12 los contempla, de modo que publicarlo como objeto obligaria a un cambio incompatible el dia que haya mas de uno."
+}

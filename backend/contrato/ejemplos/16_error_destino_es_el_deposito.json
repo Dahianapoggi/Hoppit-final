@@ -1,0 +1,23 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/ordenes",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "lat": -34.5024581,
+      "lon": -58.537415,
+      "demanda": 1
+    }
+  },
+  "respuesta": {
+    "estado": 422,
+    "cuerpo": {
+      "codigo": "destino_es_el_deposito",
+      "mensaje": "El destino se ancla al nodo 13282860598, que es el Deposito: una Orden no se entrega en el punto del que parte la Ruta",
+      "detalle": null
+    }
+  },
+  "nota": "CU-01 flujo 4b: el Deposito es el origen de toda Ruta, no un destino."
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HOPPIT · Ingresar</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/icono-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icono-180.png">
+
+<!-- IBM Plex vendorizado, no por red (FE-05). -->
+<link rel="stylesheet" href="vendor/fuentes/fuentes.css">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="acceso-marca">
+
+<!-- Ingreso (DFE-09; rediseño 2026-11 con la marca de la tesis, 12.2): panel
+     de marca en ámbar a la izquierda, formulario a la derecha. -->
+<aside class="acceso-panel" aria-hidden="true">
+  <svg class="red" viewBox="0 0 400 400" fill="none" stroke="#34383A" stroke-width="2">
+    <path d="M20 80 L140 40 L260 110 L380 60 M140 40 L120 180 L260 110 L300 240 L380 60 M120 180 L40 260 L180 300 L300 240 L360 360 M180 300 L120 180 M40 260 L20 80"/>
+    <g fill="#34383A"><circle cx="140" cy="40" r="6"/><circle cx="260" cy="110" r="6"/><circle cx="120" cy="180" r="6"/><circle cx="300" cy="240" r="6"/><circle cx="180" cy="300" r="6"/></g>
+  </svg>
+  <div class="logo"><span class="circ"><img src="img/hoppit-isotipo.png" alt=""></span><b>HOPPIT</b></div>
+  <h2>Rutas sobre las calles reales.</h2>
+  <p>Planificá el reparto de la jornada sobre la red vial, con la hora estimada de cada Parada y su banda de incertidumbre.</p>
+</aside>
+
+<main class="pagina">
+  <div class="ingreso-caja">
+    <span class="wordmark">HOPPIT</span>
+    <h1>Ingresar</h1>
+    <p class="bajada">Planificación y seguimiento de la distribución de última milla.</p>
+
+    <div id="motivo" class="ingreso-motivo" role="status" hidden></div>
+
+    <form id="formulario" novalidate>
+      <div class="campo">
+        <label for="usuario">Usuario</label>
+        <div class="inp con-icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><input id="usuario" name="usuario" autocomplete="username" required></div>
+      </div>
+      <div class="campo">
+        <label for="contrasena">Contraseña</label>
+        <div class="inp con-icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg><input id="contrasena" name="contrasena" type="password" autocomplete="current-password" required></div>
+      </div>
+      <div id="error" role="alert"></div>
+      <button class="btn-ancho" id="ingresar" type="submit" disabled>Ingresar</button>
+    </form>
+
+    <p class="ingreso-nota">¿Olvidaste la contraseña? Pedile al administrador que la restablezca.
+      ¿Tenés un código de invitación? <a href="registro.html" id="crear-cuenta">Crear la cuenta</a></p>
+    <div class="ingreso-pie">
+      <span>La sesión vale solo en esta pestaña. <a href="acerca.html">Acerca de HOPPIT</a></span>
+      <span class="num" id="version-producto"></span>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="js/ingreso.js"></script>
+</body>
+</html>

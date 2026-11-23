@@ -1,0 +1,38 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/planificaciones",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "ordenes": [
+        "orden-05",
+        "orden-06",
+        "orden-07",
+        "orden-08",
+        "orden-09"
+      ],
+      "vehiculos": {
+        "AE472LP": 13
+      }
+    }
+  },
+  "respuesta": {
+    "estado": 409,
+    "cuerpo": {
+      "codigo": "vehiculos_comprometidos",
+      "mensaje": "1 Vehiculo(s) ya participan de un Plan del 2026-08-24: AE472LP en plan-87a6569fb0e6. Un Vehiculo participa de un unico Plan por jornada; hay que liberar ese Plan o elegir otros Vehiculos.",
+      "detalle": {
+        "fecha": "2026-08-24",
+        "vehiculos": [
+          {
+            "vehiculo_id": "AE472LP",
+            "plan_id": "plan-87a6569fb0e6"
+          }
+        ]
+      }
+    }
+  },
+  "nota": "Un Vehiculo participa de un unico Plan de Distribucion por jornada (glosario, entidad 13): en dos Planes del mismo dia tendria que recorrer dos Rutas a la vez. El detalle nombra cada Vehiculo con el Plan que lo ocupa, de modo que la correccion sea concreta: liberar ese Plan o elegir otros Vehiculos. NO se planifica parcialmente con los Vehiculos libres: la instancia se declara inadmisible entera. Planificar dos veces sigue siendo correcto mientras los Vehiculos no se solapen."
+}

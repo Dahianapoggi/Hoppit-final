@@ -1,0 +1,42 @@
+{
+  "artefacto": "muestra_de_rutas_amazon_almrrc2021",
+  "ambito": "Amazon Last Mile Routing Research Challenge 2021, entrenamiento",
+  "fuente": "https://amazon-last-mile-challenges.s3.amazonaws.com/almrrc2021/almrrc2021-data-training/model_build_inputs/",
+  "herramienta": "tools/amazon_2021.py muestra",
+  "momento_utc": "2026-10-12T23:16:58.298177+00:00",
+  "parametros": {
+    "semilla": 20261013,
+    "regla": "Se excluyen las rutas de route_data.json sin secuencia en actual_sequences.json o sin matriz en travel_times.json. Las demas se agrupan por route_score y se ordenan por identificador. Un unico random.Random(semilla) recorre los estratos en orden alfabetico y toma 100 con sample() de cada uno, o todas si hay 100 o menos. La lista se escribe ordenada por identificador.",
+    "excluidas_sin_secuencia": 0,
+    "excluidas_sin_matriz": 0,
+    "rutas_cuyas_paradas_no_coinciden_con_su_matriz": 0,
+    "conteos_por_estrato": {
+      "High": {
+        "en_route_data": 2718,
+        "candidatas": 2718,
+        "elegidas": 100,
+        "se_tomaron_todas": false
+      },
+      "Low": {
+        "en_route_data": 102,
+        "candidatas": 102,
+        "elegidas": 100,
+        "se_tomaron_todas": false
+      },
+      "Medium": {
+        "en_route_data": 3292,
+        "candidatas": 3292,
+        "elegidas": 100,
+        "se_tomaron_todas": false
+      }
+    },
+    "sha256_de_los_origenes": {
+      "route_data.json": "da3a5d4e73b683d756111f0d9e6d3f20eb8e82adf7c89ee6ee0cb2239abd2f38",
+      "actual_sequences.json": "3de44067242e8fa841d4b852db8809afaa23fe852e452ee4a2f54f0f0fb77e3c",
+      "travel_times.json": "0023d7517380f15b611d77bc0f8a41a1b89459c7c12c37e88981ea16a2b99e2d"
+    },
+    "sha256": "bbe10f7bff64222c0dc44177430b57d5e225d111c1a9bd89c6e697ba5d31c8af",
+    "licencia": "CC BY-NC 4.0, https://creativecommons.org/licenses/by-nc/4.0/legalcode.txt",
+    "atribucion": "Amazon Last Mile Routing Research Challenge 2021, Amazon.com, Inc. or its affiliates"
+  }
+}

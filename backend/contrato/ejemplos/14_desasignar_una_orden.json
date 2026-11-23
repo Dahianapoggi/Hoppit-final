@@ -1,0 +1,24 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/ordenes/orden-00/desasignacion",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "ruta_invalidada": "ruta-3382bf7b8778",
+      "ordenes_liberadas": [
+        "orden-00",
+        "orden-06",
+        "orden-07",
+        "orden-20",
+        "orden-14",
+        "orden-02"
+      ]
+    }
+  },
+  "nota": "FR-03 inverso. Devuelve la Orden a Creada y la deja planificable otra vez. La Ruta que la contenia se elimina entera --no se le quita la Parada: su distancia y su carga son resultado de haber resuelto el problema sobre el conjunto completo-- y por eso TODAS sus Ordenes quedan libres, no solo la pedida. La respuesta informa ese alcance para que no haya que deducirlo."
+}

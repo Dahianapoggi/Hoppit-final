@@ -1,0 +1,31 @@
+{
+  "peticion": {
+    "metodo": "POST",
+    "ruta": "/v1/rutas/ruta-1d8aad4ec546/paradas/1/resultado",
+    "encabezados": {
+      "Authorization": "Bearer <token de sesion: JWT firmado con EdDSA, omitido en los ejemplos>"
+    },
+    "cuerpo": {
+      "resultado": "cumplida"
+    }
+  },
+  "respuesta": {
+    "estado": 200,
+    "cuerpo": {
+      "ruta_id": "ruta-1d8aad4ec546",
+      "secuencia": 1,
+      "resultado": "cumplida",
+      "ordenes": [
+        "orden-00"
+      ],
+      "estado": "completada",
+      "declarante": {
+        "usuario_id": "usuario-de-ejemplo-01",
+        "nombre_visible": "Usuario del proceso",
+        "rol": "operador",
+        "medio": "web"
+      }
+    }
+  },
+  "nota": "CU-06 sin telemetria. `cumplida` lleva las Ordenes de la Parada de En transito a Completada; `fallida`, a Fallida. `declarante` es el usuario de la sesion, con su rol al declarar y el medio `web` (ARQ-65); queda tambien en el historial de cada Orden. Se admite fuera del orden planificado. La posicion del Vehiculo, la reprogramacion y la devolucion no estan implementadas."
+}

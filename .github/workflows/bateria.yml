@@ -1,0 +1,119 @@
+# Bateria de verificacion (seccion 1.5 de ARQ_Pedido2; 2026-10-27B, D).
+# Corre en cada push y pull request a main, Backend y Frontend, con la misma
+# version menor de Python con que se verifica localmente. Las dependencias
+# salen de los lockfiles con hashes (pip-compile), no de "la ultima version
+# compatible": lo que corre aca es lo que corre en la imagen y en cualquier
+# maquina que instale desde backend/requirements-dev.txt.
+name: bateria
+
+on:
+  push:
+    branches: [main, Backend, Frontend]
+  pull_request:
+    branches: [main, Backend, Frontend]
+
+permissions:
+  contents: read
+
+jobs:
+  # Los lockfiles tienen que corresponder a pyproject.toml. pip-compile
+  # reutiliza las versiones ya fijadas, asi que si nadie toco las
+  # dependencias el resultado es identico; si alguien las cambio sin
+  # regenerar, el diff falla aca. Para regenerar: los dos comandos de abajo
+  # (README de la raiz, "Cambiar una dependencia").
+  lockfile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Instalar pip-tools
+        run: python -m pip install pip-tools==7.7.0
+
+      - name: Recompilar
+        run: |
+          pip-compile --generate-hashes --strip-extras --allow-unsafe --all-build-deps --no-emit-index-url -o requirements.txt pyproject.toml
+          pip-compile --generate-hashes --strip-extras --allow-unsafe --all-build-deps --no-emit-index-url --extra dev -c requirements.txt -o requirements-dev.txt pyproject.toml
+
+      - name: Los lockfiles no cambian
+        run: git diff --exit-code -- requirements.txt requirements-dev.txt
+
+  # La app movil: tipos y pruebas con las versiones exactas de package-lock.json.
+  movil:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: movil
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: movil/.nvmrc
+          cache: npm
+          cache-dependency-path: movil/package-lock.json
+
+      - name: Instalar
+        run: npm ci
+
+      - name: Tipos
+        run: npm run tipos
+
+      - name: Pruebas
+        run: npm test -- --ci
+
+  bateria:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      # Desde el lockfile y con hashes, sin el extra de entrenamiento, como el
+      # servidor (B-235, punto 5). El paquete propio va aparte, sin
+      # dependencias y sin aislamiento de construccion: setuptools y wheel
+      # tambien salen del lockfile y pip no descarga nada fuera de el.
+      - name: Instalar
+        run: |
+          python -m pip install --require-hashes -r requirements-dev.txt
+          python -m pip install --no-build-isolation --no-deps -e .
+
+      - name: pytest
+        run: python -m pytest -q -p no:cacheprovider
+
+      - name: mypy
+        run: python -m mypy src/hoppit
+
+      - name: lint-imports
+        run: lint-imports
+
+      - name: Limites de import
+        run: python tools/check_boundaries.py
+
+      # Los artefactos de San Isidro que usa la huella estan en git.
+      - name: Huella de la instancia canonica
+        run: python tools/huella_instancia_canonica.py
+
+      - name: Versiones instaladas
+        if: always()
+        run: python -m pip freeze > pip_freeze.txt
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pip-freeze-bateria
+          path: backend/pip_freeze.txt

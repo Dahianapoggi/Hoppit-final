@@ -1,0 +1,76 @@
+{
+ "version": "2026-11-23A",
+ "rotulo": "frecuencia esperada de hechos con lesionados o fallecidos por anio, por arco no dirigido del grafo de CABA; no modela severidad ni exposicion por vehiculo-kilometro",
+ "grafo": "grafo_ciudad_autonoma_de_buenos_aires_2026-10-14.graphml",
+ "grafo_sha256": "03c7b8ff183132324067a63a91c297b259d41be74ba5a7a6b21ffd4d5d049f79",
+ "datos": {
+  "fuente": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/transporte-y-obras-publicas/victimas-siniestros-viales/siniestros_viales_hechos.csv",
+  "licencia_tal_como_figura": "Creative Commons Attribution (cc-by), segun el portal (package_show de victimas-siniestros-viales)",
+  "sha256_de_la_tabla_de_hechos": "e1d232514458c110b5daee5350042e2d8d4b666f6caf4bce4d8675a1b8b93be5",
+  "descargado": "2026-11-23T05:24:10-0300",
+  "tabla_usada": "solo hechos (sin atributos de victimas)",
+  "anios_de_entrenamiento": [
+   2019,
+   2022,
+   2023,
+   2024
+  ],
+  "anio_de_prueba": 2025,
+  "excluidos": "2020 y 2021 (pandemia)",
+  "hechos_entrenamiento": 38324,
+  "hechos_prueba": 11047
+ },
+ "modelo": {
+  "familia": "binomial negativa NB2",
+  "alfa_nb2": 2.7575885687658483,
+  "dispersion_de_pearson_del_poisson": 1.6529771047720014,
+  "offset": "log(largo en km) + log(anios)",
+  "adopcion": {
+   "menor_devianza_entre_entrenados": "glm",
+   "mejora_a_la_nula_en_devianza_y_acierto_10": true,
+   "adoptado": "glm"
+  }
+ },
+ "metricas_en_prueba": {
+  "nula": {
+   "devianza_media_de_poisson": 0.24600213127073636,
+   "hechos_predichos": 9581.00000073,
+   "acierto_5": 0.16647053498687425,
+   "pai_5": 3.330628829677193,
+   "longitud_cubierta_5": 0.04998171321390042,
+   "acierto_10": 0.280528650312302,
+   "pai_10": 2.8092192593298373,
+   "longitud_cubierta_10": 0.09986000536648196
+  },
+  "glm": {
+   "devianza_media_de_poisson": 0.23829242166458856,
+   "hechos_predichos": 9781.127188456714,
+   "acierto_5": 0.23110346700461665,
+   "pai_5": 4.62242775571234,
+   "longitud_cubierta_5": 0.04999612308034924,
+   "acierto_10": 0.36996469629763734,
+   "pai_10": 3.700472918869282,
+   "longitud_cubierta_10": 0.09997767972064606
+  },
+  "hgb": {
+   "devianza_media_de_poisson": 0.2940984122847171,
+   "hechos_predichos": 16683.916399777547,
+   "acierto_5": 0.24622069340092334,
+   "pai_5": 4.92445409338315,
+   "longitud_cubierta_5": 0.0499995915753917,
+   "acierto_10": 0.3779306599076672,
+   "pai_10": 3.7796388151733438,
+   "longitud_cubierta_10": 0.0999912103745115
+  }
+ },
+ "procedencia": "encargo 2026-11-23A, bloque R3 (referencia/informes/2026-11-23A_anexos/scripts/r3_modelos.py)",
+ "columnas": [
+  "arco",
+  "riesgo_hechos_por_anio"
+ ],
+ "clave_del_arco": "menor nodo-mayor nodo-largo en metros redondeado",
+ "arcos": 31705,
+ "riesgo_medio_por_arco": 0.3085042481771554,
+ "archivo": "riesgo_por_arco_caba_2026-11-23A.csv",
+ "sha256": "38cbec6f26829e8ba4006bb06315cd3b2cbccc2a7d24e2bdb16fd0381c431c7d"
+}
